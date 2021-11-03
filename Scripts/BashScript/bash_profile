@@ -1,0 +1,43 @@
+  GNU nano 2.0.6                                            File: /Users/macbook-estagio/.bash_profile                                                                                               
+
+
+
+source ~/.nvm/nvm.sh
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+export GRADLE_HOME=~/Development/gradle-2.2.1/bin/
+export PATH=$PATH:$GRADLE_HOME
+export PATH=$PATH:/Users/macbook-estagio/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts
+export PATH=$PATH:/Users/macbook-estagio/Desktop/matheus/trabalho/EXECUTAVEIS/AABTolls/
+
+export PATH=$PATH:/Users/macbook-estagio/Desktop/MATHEUS/ESTUDO/BANCO_DE_DADOS/cursoMongoDB/mongodb-macos-x86_64-4.2.3/bin
+
+export PATH=$PATH:$(yarn global bin)
+
+alias bash_profile="nano ~/.bash_profile"
+
+alias c="clear"
+alias d="adb devices"
+alias connectDeviceFulltime="adb connect 172.19.12.90:5555"
+alias connectDeviceHome="adb connect 192.168.86.3:5555"
+alias devmenu="adb shell input keyevent 82"
+
+dm () {
+  echo "---Accessing the In-App Developer Menu---"
+  echo "Link: https://reactnative.dev/docs/debuggin"
+  echo ""
+  adb shell input swipe 300 2300 300 2300 2000 #long press
+}
+
+getDimensions () {
+  echo "---Get a dimensions from screen device---"
+  echo "Resolução da tela: $(adb shell wm size)"
+  echo "Densidade (pixels/polegada): $(adb shell wm density)"
+  echo ""
+}
+
+^G Get Help                     ^O WriteOut                     ^R Read File                    ^Y Prev Page                    ^K Cut Text                     ^C Cur Pos
+^X Exit                         ^J Justify                      ^W Where Is                     ^V Next Page                    ^U UnCut Text                   ^T To Spell

@@ -1,0 +1,43 @@
+
+>>> Data de Criação: 2021-09-16 09:46:21 às 09:46:21 <<<
+
+Indice: 5622
+Nome do App: Auvo Rastrear
+Cor1: #244F7F
+
+Empresa: Empresa: Auvo
+Cliente: Gislaine
+Email: contato@auvomonitoramento.com.br
+Site: https://www.auvomonitoramento.com.br/
+Telefone: +55 +55 19 39031508
+Copyright: 
+
+Email conta Android: auvoapp@gmail.com
+Senha conta Android: Auvo81191105
+
+Email conta IOS: auvoapp@gmail.com
+Senha conta IOS: Auvo81191105
+
+
+------------------------ DESENVOLVIMENTO ------------------------ 
+
+Loja Android: https://play.google.com/store/apps/details?id=br.com.auvorastrear
+Loja IOS: https://apps.apple.com/us/app/Auvo Rastrear/id#?platform=iphone
+
+Contato Teste: 19999770992
+
+AliasDaKeyStore: auvorastrear
+PasswordDaKeyStore1: auvorastrear5622
+PasswordDaKeyStore2: auvorastrear5622
+NomeDaKeyStore: auvorastrear
+
+Bundle Android: br.com.auvorastrear
+Bundle IOS: br.com.auvorastrear.ios
+
+AppIDOnesignal: 
+
+Politica: http://fulltrack-tools.ftdata.com.br/PrivacyPolicy/5622
+
+Versão: 6.0.7 na data 2021-09-16 09:46:21
+VersionCode: 600008 na data 2021-09-16 09:46:21
+  

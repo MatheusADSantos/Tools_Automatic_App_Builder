@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "211948498986",
+    "project_id": "invictos-control",
+    "storage_bucket": "invictos-control.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211948498986:android:deecf59ac99bfdd8019353",
+        "android_client_info": {
+          "package_name": "br.com.invictuscontrol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211948498986-aou5bar6ondaupar827inace5hb94tgi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrHJWGgwqeUWbEMp3jHO9R9PCY3BpJg_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211948498986-aou5bar6ondaupar827inace5hb94tgi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

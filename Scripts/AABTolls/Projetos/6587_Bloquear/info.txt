@@ -1,0 +1,43 @@
+
+>>> Data de Criação: 2021-09-20 17:05:14 às 17:05:14 <<<
+
+Indice: 6587
+Nome do App: Bloquear
+Cor1: #AF2E24
+
+Empresa: Empresa: Velox
+Cliente: Eduardo Roma
+Email: eduardo@iclubbrasil.com.br
+Site: https://bloquearmonitoramento.com.br/
+Telefone: +55 +55 0800 940 5445
+Copyright: BLOQUEAR RASTREAMENTO LTDA
+
+Email conta Android: eduardo@iclubbrasil.com.br
+Senha conta Android: fulltime2019
+
+Email conta IOS: ti@bloquearmonitoramento.com.br
+Senha conta IOS: nova123321Duli
+
+
+------------------------ DESENVOLVIMENTO ------------------------ 
+
+Loja Android: https://play.google.com/store/apps/details?id=br.com.velox.mobile
+Loja IOS: https://apps.apple.com/us/app/Bloquear/id#?platform=iphone
+
+Contato Teste: 891892893
+
+AliasDaKeyStore: bloquear
+PasswordDaKeyStore1: 8f9vs894tgnl
+PasswordDaKeyStore2: 8f9vs894tgnl
+NomeDaKeyStore: bloquear
+
+Bundle Android: br.com.velox.mobile
+Bundle IOS: br.com.bloquearmonitoramento.mobile
+
+AppIDOnesignal: 
+
+Politica: http://fulltrack-tools.ftdata.com.br/PrivacyPolicy/6587
+
+Versão: 6.0.8 na data 2021-09-20 17:05:14
+VersionCode: 600010 na data 2021-09-20 17:05:14
+  

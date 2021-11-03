@@ -1,0 +1,43 @@
+
+>>> Data de Criação: 2021-10-26 00:00:49 às 00:00:49 <<<
+
+Indice: 3461
+Nome do App: Velotracker Mobile
+Cor1: #C10010
+
+Empresa: Empresa: Empresa: Velotracker
+Cliente: Antonio C. Ferreira
+Email: contato@velotracker.com.br
+Site: www.velotracker.com.br
+Telefone: +55 +55 +55 19 41221911
+Copyright: © 2019 VeloTracker
+
+Email conta Android: compartilhada
+Senha conta Android: compartilhada
+
+Email conta IOS: compartilhada 
+Senha conta IOS: compartilhada 
+
+
+------------------------ DESENVOLVIMENTO ------------------------ 
+
+Loja Android: https://play.google.com/store/apps/details?id=br.com.velotrackermobile
+Loja IOS: https://apps.apple.com/us/app/Velotracker Mobile/id#?platform=iphone
+
+Contato Teste: 53153253334
+
+AliasDaKeyStore: velotrackermobile
+PasswordDaKeyStore1: velotrackermobile
+PasswordDaKeyStore2: velotrackermobile
+NomeDaKeyStore: velotrackermobile
+
+Bundle Android: br.com.velotrackermobile
+Bundle IOS: 
+
+AppIDOnesignal: 
+
+Politica: http://fulltrack-tools.ftdata.com.br/PrivacyPolicy/3461
+
+Versão: 6.0.10 na data 2021-10-26 00:00:49
+VersionCode: 600014 na data 2021-10-26 00:00:49
+  

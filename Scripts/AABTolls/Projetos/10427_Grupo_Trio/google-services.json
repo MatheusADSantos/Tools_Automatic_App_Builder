@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "700850434617",
+    "firebase_url": "https://fmobile-6.firebaseio.com",
+    "project_id": "fmobile-6",
+    "storage_bucket": "fmobile-6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:700850434617:android:179c49a7d41a7e2b0c13e8",
+        "android_client_info": {
+          "package_name": "com.fulltrack.fmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "700850434617-u908m5geikfcgiq4vqraki8siob42ebr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHfwbUvs-ZiNH2DyKJ4O8kNxj7Hxa77ZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "700850434617-u908m5geikfcgiq4vqraki8siob42ebr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "700850434617-lfhqgq2k0dpv5932ikm82ra90ac4aef1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fulltrack.fmobile"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:700850434617:android:b8b6a6b2785a74b90c13e8",
+        "android_client_info": {
+          "package_name": "fullttrack.com.br"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "700850434617-u908m5geikfcgiq4vqraki8siob42ebr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHfwbUvs-ZiNH2DyKJ4O8kNxj7Hxa77ZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "700850434617-u908m5geikfcgiq4vqraki8siob42ebr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "700850434617-lfhqgq2k0dpv5932ikm82ra90ac4aef1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fulltrack.fmobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

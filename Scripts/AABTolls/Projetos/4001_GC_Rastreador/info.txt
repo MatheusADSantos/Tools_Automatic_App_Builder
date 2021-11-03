@@ -1,0 +1,43 @@
+
+>>> Data de Criação: 2021-09-23 10:27:26 às 10:27:26 <<<
+
+Indice: 4001
+Nome do App: GC Rastreador
+Cor1:  #272c4c
+
+Empresa: Empresa: GRUPO CONSAT
+Cliente: Rene Dahmen Viola
+Email: gconsat@gmail.com
+Site: http://www.grupoconsat.com.br
+Telefone: +55 19 3132-0032
+Copyright: Grupo Consat
+
+Email conta Android: gconsat@gmail.com
+Senha conta Android: tasnoc1996
+
+Email conta IOS: gconsat@gmail.com
+Senha conta IOS: Tasnoc1996
+
+
+------------------------ DESENVOLVIMENTO ------------------------ 
+
+Loja Android: https://play.google.com/store/apps/details?id=br.com.gcrastreador
+Loja IOS: https://apps.apple.com/us/app/GC Rastreador/id#?platform=iphone
+
+Contato Teste: 68768868920
+
+AliasDaKeyStore: gcrastreador
+PasswordDaKeyStore1: gcrastreador4001
+PasswordDaKeyStore2: gcrastreador4001
+NomeDaKeyStore: gcrastreador
+
+Bundle Android: br.com.gcrastreador
+Bundle IOS: 
+
+AppIDOnesignal: 
+
+Politica: http://fulltrack-tools.ftdata.com.br/PrivacyPolicy/4001
+
+Versão: 6.0.8 na data 2021-09-23 10:27:26
+VersionCode: 600010 na data 2021-09-23 10:27:26
+  

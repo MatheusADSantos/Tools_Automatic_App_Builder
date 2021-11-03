@@ -1,0 +1,44 @@
+
+>>> Data de Criação: 2021-10-08 10:36:59 às 10:36:59 <<<
+
+Indice: 5877
+Nome do App: Soluzion
+Cor1:  #703872
+Cor2:  #7B4A7D
+
+Empresa: Empresa: SOLUZION Soluções Logísticas Ltda.
+Cliente: Idoel
+Email: 
+Site: https://www.soluzion.com.br/
+Telefone: +55 +55 
+Copyright: © Souluzion, 2021
+
+Email conta Android: compartilhada
+Senha conta Android: compartilhada
+
+Email conta IOS: idoelaltmann@gmail.com
+Senha conta IOS: Gauderio05784223
+
+
+------------------------ DESENVOLVIMENTO ------------------------ 
+
+Loja Android: https://play.google.com/store/apps/details?id=br.com.tecnocell.mobile
+Loja IOS: https://apps.apple.com/us/app/Soluzion/id1486914048#?platform=iphone
+
+Contato Teste: 
+
+AliasDaKeyStore: tecnocell
+PasswordDaKeyStore1: tecnocell8671
+PasswordDaKeyStore2: tecnocell8671
+NomeDaKeyStore: tecnocell
+
+Bundle Android: br.com.tecnocell.mobile
+Bundle IOS: 
+
+AppIDOnesignal: 
+
+Politica: http://fulltrack-tools.ftdata.com.br/PrivacyPolicy/5877
+
+Versão: 5.2.0 na data 2021-10-08 10:36:59
+VersionCode: 4001019 na data 2021-10-08 10:36:59
+  
