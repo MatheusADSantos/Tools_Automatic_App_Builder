@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Criei esse .sh apenas para testar as chamadas do script em python, para que ative o venv e chame o script
-source ~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/Python/envAutomationWebScript/bin/activate
+source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/enviromentAutomation/bin/activate
 
 scriptPython=$1
 scriptPython=$([[ $scriptPython == '' ]] && echo 'gerar icons' || echo $scriptPython)
@@ -15,7 +15,7 @@ case $scriptPython in
   appName=$([[ $appName == '' ]] && echo 'Notificação' || echo $appName)
   echo "App Name: -----> $appName"
   sleep 2
-  python ~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/Python/generatorIcons.py "$appName"
+  python ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/generatorIcons.py "$appName"
   ;;
 
 'gerar jsons')
@@ -23,7 +23,7 @@ case $scriptPython in
   emailFirebase=$([[ $emailFirebase == '' ]] && echo 'ftgestoradados@gmail.com' || echo $emailFirebase)
   echo "Email Firebase: -----> $emailFirebase"
   sleep 2
-  python ~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/Python/generatorJsons.py $emailFirebase
+  python ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/generatorJsons.py $emailFirebase
   ;;
 
 *)

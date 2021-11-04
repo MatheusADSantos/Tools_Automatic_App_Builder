@@ -1,5 +1,5 @@
 # !/bin/bash -i
-source ~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/Python/envAutomationWebScript/bin/activate
+source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/enviromentAutomation/bin/activate
 
 print_red() {
   printf "\e[0;31m$1\e[0m"
@@ -20,9 +20,9 @@ print_light_green() {
 # # Paths importantes
 pathProject=$1
 PATH_APKSIGNER=~/Library/Android/sdk/build-tools/29.0.3/apksigner
-pathScripts=/Users/macbook-estagio/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/BashScript
-keystorePath=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Keystores
-pathToAAB=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls
+pathScripts=/Users/macbook-estagio/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript
+keystorePath=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Keystores
+pathToAAB=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls
 # Dados da keystore
 nomeDaKeystore=$2
 alias=$3
@@ -101,7 +101,7 @@ builddingApkAndAAB() {
   # mv ./$BUILD_APK_UNSIGNED.apk ./$BUILD.apk
   mv ./$BUILD.apk $pathProject/app/build/outputs/apk/release/
   rm ./$nomeDaKeystore.keystore
-  # ~/Library/Android/sdk/build-tools/29.0.3/apksigner sign --ks ~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Keystores/invictuscontrol.keystore --ks-key-alias invictus --ks-pass pass:invictuscontrol5977 --key-pass pass:invictuscontrol5977 ./app-release.apk
+  # ~/Library/Android/sdk/build-tools/29.0.3/apksigner sign --ks ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Keystores/invictuscontrol.keystore --ks-key-alias invictus --ks-pass pass:invictuscontrol5977 --key-pass pass:invictuscontrol5977 ./app-release.apk
 
   cd $pathProject/app/build/outputs/apk/release/
   print_blue "\n\n-> Movendo de: \n$pathProject/app/build/outputs/apk/release/$BUILD.apk para: \n$pathToAAB\n"

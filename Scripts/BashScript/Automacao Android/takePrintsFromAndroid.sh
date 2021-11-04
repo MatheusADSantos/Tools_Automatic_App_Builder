@@ -25,7 +25,7 @@ print_light_green() {
 indice=$1
 projectFmobile=$2
 device=$3
-pathProjects=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos
+pathProjects=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Projetos
 
 dealWithPrints() {
   print_light_red "\n\nEntrando com os parametros: \n"
@@ -127,7 +127,7 @@ searchingAndRemovingDevicePrints() {
 }
 
 getInformation() {
-  pathProjects=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos
+  pathProjects=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Projetos
   cd $pathProjects
   touch projetos.txt            #Criando projetos.txt
   printf "$(ls)" >>projetos.txt #Inserindo o conteúdo no projetos.txt
@@ -156,7 +156,7 @@ getInformation() {
     print_light_red "\n-> INDICE: $indice \n-> PROJETO: $projeto \n-> BUNDLE: $bundle\n\n\n"
     sleep 2
 
-    sh ~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/BashScript/unlockDevice.sh
+    sh ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript/unlockDevice.sh
   else
     print_light_red "\n-> Não temos nenhum projeto com o indice ($indice)..........\n\n"
   fi

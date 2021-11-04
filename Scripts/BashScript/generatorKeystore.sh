@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # caminhoRaiz=$(pwd);
-# pathKeystores=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Keystores/
+# pathKeystores=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Keystores/
 
 # echo -e $"\nCaminho de origem do gerador de keystore: /Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home"
 # # cd /Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home
@@ -33,7 +33,7 @@ if [[ $nomeDaKeystore == '' || $alias == '' ]]; then
   # sh $pathScripts/generatorKeystore.sh $nomeDaKeystore $alias
 fi
 
-keystorePath=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Keystores/
+keystorePath=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Keystores/
 # generatorPathOfKeystore=~/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home
 generatorPathOfKeystore=/Library/Java/JavaVirtualMachines/jdk-11.0.12.jdk
 

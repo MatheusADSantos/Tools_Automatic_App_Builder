@@ -1,11 +1,10 @@
-#!/Users/macbook-estagio/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/Python/envAutomationWebScript/bin/python
+#!/Users/macbook-estagio/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/enviromentAutomation/bin/python
 
 import time
 import pyttsx3
 import pyautogui as pa
 import sys
 import os
-import glob
 import zipfile
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -13,8 +12,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.select import Select
 from pynput.mouse import Button, Controller
 mouse = Controller()
-from PIL import Image
-# print("PArametro 1: ", sys.argv[0],"\nPArametro 2:", sys.argv[1])
+
+print("PArametro 1: ", sys.argv[0],"\nPArametro 2:", sys.argv[1])
 
 
 pa.PAUSE = 3

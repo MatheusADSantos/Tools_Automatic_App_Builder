@@ -1,39 +1,25 @@
 # !/bin/bash -i
-source ~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/Python/envAutomationWebScript/bin/activate
 
-# Black        0;30     Dark Gray     1;30
-# Red          0;31     Light Red     1;31
-# Green        0;32     Light Green   1;32
-# Brown/Orange 0;33     Yellow        1;33
-# Blue         0;34     Light Blue    1;34
-# Purple       0;35     Light Purple  1;35
-# Cyan         0;36     Light Cyan    1;36
-# Light Gray   0;37     White         1;37
+source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/envAutomationWebScript/bin/activate
 
-print_light_gray() {
-  printf "\e[1;37m$1\e[0m"
-}
+# Customs do FMobile 5.0
+# automationCustomFMobile6ANDROID.sh "velha" "alias" "nomeDaKeystore" "senha1" "senha2" "bundleAndroid" "bundleIOS"
 
 print_red() {
   printf "\e[0;31m$1\e[0m"
 }
-
 print_light_red() {
   printf "\e[1;31m$1\e[0m"
 }
-
 print_blue() {
   printf "\e[0;34m$1\e[0m"
 }
-
 print_light_blue() {
   printf "\e[1;34m$1\e[0m"
 }
-
 print_green() {
   printf "\e[0;32m$1\e[0m"
 }
-
 print_light_green() {
   printf "\e[1;32m$1\e[0m"
 }
@@ -42,15 +28,6 @@ print_light_red "\n\n*********************************\nComeçando às $(date +%
 print_green "\n\n--------------------------------------------------------------------------------------"
 print_green "\n\n-------------------  $(print_light_green "AUTOMAÇÃO DE CUSTOMIZAÇÃO FMOBILE 6.0 ANDROID")  $(print_green "------------------")"
 print_green "\n\n--------------------------------------------------------------------------------------"
-
-# Bloquear
-# automationCustomFMobile6ANDROID.sh "velha" "bloquear" "bloquear" "8f9vs894tgnl" "8f9vs894tgnl" "br.com.velox.mobile" "br.com.bloquearmonitoramento.mobile"
-
-# Auvo
-# automationCustomFMobile6ANDROID.sh "velha" "auvorastrear" "auvorastrear" "auvorastrear5622" "auvorastrear5622" "br.com.auvorastrear" "br.com.auvorastrear.ios"
-
-# Grupo Trio
-# automationCustomFMobile6ANDROID.sh "velha" "triorastreamento" "triorastreamento" "triorastreamento10427" "triorastreamento10427" "br.com.triorastreamento" "br.com.triorastreamento.ios"
 
 customJaExistia=$1
 alias=$2
@@ -75,9 +52,9 @@ bundleIOS=$7
 enteringTheDatas() {
   print_light_red "\n\n\n\n\n--------------------      Entrando com os dados ...      --------------------"
   # Paths Uteis ...
-  pathScripts=/Users/macbook-estagio/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/BashScript
-  keystorePath=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Keystores
-  pathToAAB=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls #Path de onde está o script.ssh e o bundletool
+  pathScripts=/Users/macbook-estagio/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript
+  keystorePath=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Keystores
+  pathToAAB=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls #Path de onde está o script.ssh e o bundletool
   pathProject=~/Documents/Fulltrack/FMobile6_Android/               #$(pwd)
   PATH_APKSIGNER=~/Library/Android/sdk/build-tools/29.0.3/apksigner
 
@@ -471,12 +448,12 @@ CreateDirectoryToNewProject() {
     # mv ./google-services.json ./Projetos/"$projeto"/
     cp ~/Downloads/google-services.json $pathToAAB/Projetos/"$projeto"/
 
-    print_green "\nInserindo nova custom 6.0"
+    print_green "\nInserindo nova custom 6.0\n"
     printf "\n\n\n$projeto \n- Versão: $versao \n- versionCode: $versionCode \n- Data: $data" >>./Projetos/customs_fmobile_6.0.txt
 
-    mv ./$nomeDaKeystore.keystore ./Projetos/"$projeto"/"KEYSTORE"
-    mv ./info.txt ./Projetos/"$projeto"
-    mv ./info_"$projeto".html ./Projetos/"$projeto"
+    cp $keystorePath/$nomeDaKeystore.keystore $pathToAAB/Projetos/"$projeto"/"KEYSTORE"
+    mv $pathToAAB/info.txt $pathToAAB/Projetos/"$projeto"
+    mv $pathToAAB/info_"$projeto".html $pathToAAB/Projetos/"$projeto"
 
     printf "\nScripts/AABTolls/Projetos/$projeto/BUILDS/" >>../../.gitignore
   fi
@@ -485,7 +462,7 @@ CreateDirectoryToNewProject
 
 # addingToGitignore() {
 #   print_light_red "\n\n\nAdicionando no .gitignore os BUILDS do projeto ...\n"
-#   $(git rm --cache -r ~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos/$projeto/BUILDS/)
+#   $(git rm --cache -r ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Projetos/$projeto/BUILDS/)
 #   sleep 2
 #   printf "\nScripts/AABTolls/Projetos/$projeto/BUILDS/" >> .gitignore
 #   $(git status -s)
@@ -585,12 +562,12 @@ uploadProjectToSeverFileSystem
 # bundle="br.com.mytracker" # bundle=$bundle
 # scheme="My Tracker" # scheme=$nome
 # project="900000_My Tracker" # project=$projeto
-# # cd ~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos
+# # cd ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Projetos
 # # ls
 # # echo -e "Which project: "
 # # read project
-# pathBuildsProjectIOS=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos/$project/BUILDS/IOS
-# pathPrintsProjectIOS=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos/$project/IMAGENS/prints/IOS
-# pathScripts=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/BashScript
+# pathBuildsProjectIOS=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Projetos/$project/BUILDS/IOS
+# pathPrintsProjectIOS=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Projetos/$project/IMAGENS/prints/IOS
+# pathScripts=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript
 
 # sh $pathScripts/takePrintsFromIOS.sh "$pathBuildsProjectIOS" "$pathPrintsProjectIOS" $bundle $scheme

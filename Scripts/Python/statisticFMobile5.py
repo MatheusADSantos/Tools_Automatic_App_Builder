@@ -1,4 +1,4 @@
-#!/Users/macbook-estagio/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/Python/envAutomationWebScript/bin/python
+#!/Users/macbook-estagio/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/envAutomationWebScript/bin/python
 
 import time
 import requests
@@ -9,7 +9,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 from webdriver_manager.chrome import ChromeDriverManager
-# driver = webdriver.Chrome(executable_path='~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/Python/envAutomationWebScript/bin')
+# driver = webdriver.Chrome(executable_path='~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/envAutomationWebScript/bin')
 driver = webdriver.Chrome(ChromeDriverManager().install())
 
 import ssl

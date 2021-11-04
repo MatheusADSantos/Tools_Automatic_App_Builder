@@ -25,7 +25,7 @@
 # cd $pathProject
 # echo "All information from project: "
 # xcodebuild -list -project $scheme.xcodeproj
-# # sh /Users/macbook-estagio/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/BashScript/cleanXCode.sh
+# # sh /Users/macbook-estagio/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript/cleanXCode.sh
 
 # echo $"*Path to Build: "$pathBuildsProjectIOS" \n*Path to Prints: $pathPrintsProjectIOS \n*Path from Project: $pathProject \n*Bundle: $bundle_id"
 
@@ -89,7 +89,7 @@
 # # Como construir um projeto iOS com comando?
 # # https://medium.com/@marksiu/how-to-build-ios-project-with-command-82f20fda5ec5
 
-# sh /Users/macbook-estagio/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/BashScript/cleanXCode.sh
+# sh /Users/macbook-estagio/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript/cleanXCode.sh
 
 pathBuildsProjectIOS=$1
 pathPrintsProjectIOS=$2
@@ -155,7 +155,7 @@ xcrun simctl install booted "$pathBuildsProjectIOS"/$scheme.app
 # xcrun simctl install booted "$pathBuildsProjectIOS"/$scheme
 
 
-# xcrun simctl install booted /Users/macbook-estagio/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos/8030_Sekron SAT/BUILDS/IOS/old3/FMobile.xcarchive/Products/Applications/FMobile
+# xcrun simctl install booted /Users/macbook-estagio/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Projetos/8030_Sekron SAT/BUILDS/IOS/old3/FMobile.xcarchive/Products/Applications/FMobile
 
 sleep 5
 

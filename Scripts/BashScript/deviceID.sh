@@ -2,7 +2,7 @@
 
 echo ""
 echo ""
-cd ~/Desktop/matheus/trabalho/EXECUTAVEIS/AABTolls/
+cd ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/AABTolls/
 
 cat devices.txt
 printf "$(adb devices)" >>devices.txt

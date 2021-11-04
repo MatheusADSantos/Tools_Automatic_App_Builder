@@ -29,7 +29,7 @@ sleep 5
 # -------------------------------------------------------------------------------------------------------------------
 
 getInformation() {
-  # pathToAAB=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls
+  # pathToAAB=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls
   # cd $pathToAAB/Projetos
   # print_light_red "\n\n\n>>> PROJETOS EXISTENTES <<<\n"
   # print_green "$(ls) \n"
@@ -39,8 +39,8 @@ getInformation() {
   # projeto=$resultadoDaBuscaDoProjeto
   # rm projetos.txt
 
-  pathToAAB=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls
-  pathProjects=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos
+  pathToAAB=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls
+  pathProjects=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Projetos
   cd $pathProjects
   touch projetos.txt            #Criando projetos.txt
   printf "$(ls)" >>projetos.txt #Inserindo o conteúdo no projetos.txt

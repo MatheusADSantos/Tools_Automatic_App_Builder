@@ -45,10 +45,10 @@ print_blue "\n\n- Nome do App: $appName \n- Bundle: $bundle \n- Cor: $cor \n- Al
 print_red "\n\n\n                    >>>ATENÇÃO<<< \n... Aguardando 10 segundos pra conferir os dados ...\n\n"
 sleep 10
 
-pathScripts=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/BashScript
-pathToAAB=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/
-pathImagens=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Imagens
-keystorePath=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Keystores
+pathScripts=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript
+pathToAAB=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/
+pathImagens=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Imagens
+keystorePath=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Keystores
 pathProject=~/Documents/Fulltrack/FMobile6_Android #pode excluir!!!!!!!
 
 changeAppName() {

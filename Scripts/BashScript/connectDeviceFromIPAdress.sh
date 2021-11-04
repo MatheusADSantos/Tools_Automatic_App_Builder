@@ -78,5 +78,5 @@ dealWithToConnectDevice() {
 }
 dealWithToConnectDevice
 
-# pathScripts=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/BashScript
+# pathScripts=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript
 # sh $pathScripts/unlockDevice.sh "$IPDeviceToUnlock" "$nameDeviceToUnlock"
