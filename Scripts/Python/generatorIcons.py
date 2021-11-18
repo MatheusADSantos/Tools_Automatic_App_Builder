@@ -1,4 +1,4 @@
-#!/Users/macbook-estagio/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/enviromentAutomation/bin/python
+#!/Users/macbook-estagio/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/environmentAutomation/bin/python
 
 import time
 import pyttsx3

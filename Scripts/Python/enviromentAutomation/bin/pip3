@@ -1,4 +1,4 @@
-#!/Users/macbook-estagio/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/enviromentAutomation/bin/python3
+#!/Users/macbook-estagio/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/environmentAutomation/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

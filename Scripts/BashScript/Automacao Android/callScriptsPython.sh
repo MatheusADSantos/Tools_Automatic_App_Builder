@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Criei esse .sh apenas para testar as chamadas do script em python, para que ative o venv e chame o script
-source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/enviromentAutomation/bin/activate
+source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/environmentAutomation/bin/activate
 
 scriptPython=$1
 scriptPython=$([[ $scriptPython == '' ]] && echo 'gerar icons' || echo $scriptPython)

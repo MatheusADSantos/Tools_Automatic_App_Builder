@@ -29,8 +29,8 @@ sleep 5
 # -------------------------------------------------------------------------------------------------------------------
 
 getInformation() {
-  # pathToAAB=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls
-  # cd $pathToAAB/Projetos
+  # pathToRoot=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/
+  # cd ~/Documents/Products_Customs/Projetos
   # print_light_red "\n\n\n>>> PROJETOS EXISTENTES <<<\n"
   # print_green "$(ls) \n"
   # touch projetos.txt            #Criando projetos.txt
@@ -39,8 +39,8 @@ getInformation() {
   # projeto=$resultadoDaBuscaDoProjeto
   # rm projetos.txt
 
-  pathToAAB=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls
-  pathProjects=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Projetos
+  pathToRoot=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/
+  pathProjects=~/Documents/Products_Customs/Projetos
   cd $pathProjects
   touch projetos.txt            #Criando projetos.txt
   printf "$(ls)" >>projetos.txt #Inserindo o conteúdo no projetos.txt
@@ -62,7 +62,7 @@ getInformation() {
     print_green "$projeto\n\n"
     sleep 2
 
-    cd $pathToAAB/Projetos/"$projeto"/
+    cd ~/Documents/Products_Customs/Projetos/"$projeto"/
     bundle=$(awk '/Bundle Android/{print $0}' info.txt | awk '{sub(/Bundle Android: /,""); print}')
 
     print_green "\n\n\n-> INDICE: $indice \n-> PROJETO: $projeto \n-> BUNDLE: $bundle\n\n"

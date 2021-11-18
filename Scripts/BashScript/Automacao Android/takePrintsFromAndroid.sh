@@ -25,7 +25,7 @@ print_light_green() {
 indice=$1
 projectFmobile=$2
 device=$3
-pathProjects=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Projetos
+pathProjects=~/Documents/Products_Customs/Projetos
 
 dealWithPrints() {
   print_light_red "\n\nEntrando com os parametros: \n"
@@ -127,7 +127,7 @@ searchingAndRemovingDevicePrints() {
 }
 
 getInformation() {
-  pathProjects=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Projetos
+  pathProjects=~/Documents/Products_Customs/Projetos
   cd $pathProjects
   touch projetos.txt            #Criando projetos.txt
   printf "$(ls)" >>projetos.txt #Inserindo o conteúdo no projetos.txt
@@ -177,8 +177,8 @@ gettingPrintsFromFmobile6() {
   sleep 7
   adb -s $device shell screencap $pathToScreenshots/Autenticacao1_"$bundle".png
   sleep 4
-  # adb -s $device shell input tap 500 1050
-  adb -s $device  shell input tap 500 1013
+  adb -s $device shell input tap 500 1013 # With icon(original)
+  adb -s $device shell input tap 500 1025 # With icon(184x104)
   adb -s $device shell input text "14123456789"
   adb -s $device shell input keyevent 66
 

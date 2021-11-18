@@ -1,5 +1,5 @@
 # !/bin/bash -i
-source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/enviromentAutomation/bin/activate
+source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/environmentAutomation/bin/activate
 
 print_red() {
   printf "\e[0;31m$1\e[0m"
@@ -20,9 +20,9 @@ print_light_green() {
 # # Paths importantes
 pathProject=$1
 PATH_APKSIGNER=~/Library/Android/sdk/build-tools/29.0.3/apksigner
-pathScripts=/Users/macbook-estagio/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript
-keystorePath=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Keystores
-pathToAAB=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls
+pathScripts=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript
+keystorePath=~/Documents/Products_Customs/Keystores/
+pathToRoot=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/
 # Dados da keystore
 nomeDaKeystore=$2
 alias=$3
@@ -40,12 +40,19 @@ versionCode=$8
 
 automatico=$9
 
+print_light_green "\n\n\n1: $1 \n2: $2 \n3: $3 \n4: $4 \n5: $5 \n6: $6 \n7: $7 \n8: $8 \n9: $9"
+# afplay /System/Library/Sounds/Blow.aiff
+# afplay /System/Library/Sounds/Blow.aiff
+# sleep 1
+# afplay /System/Library/Sounds/Blow.aiff
+# osascript -e 'display alert "ATENÇÃO!" message "Vai ser instalado o aplicativo! \nDe OK para continuar..."'
+
 print_light_red "\n\nSCRIPT to build, install and Move (APK/AAB) to your respective folder ..."
 
 print_red "\n\nInfo. CONSTANTES/KEYSTORES/PATHs ..."
 print_green " \n-Path do Projeto: $pathProject \n-Path do APKSigner: $PATH_APKSIGNER 
               \n-Nome da keystore: $nomeDaKeystore\n-Alias: $alias\n-Password1: $passwordDaKeystore1\n-Password2: $passwordDaKeystore2 
-              \n-Path Scripts: $pathScripts \n-Path Keystore: $keystorePath \n-Path diretório AAB: $pathToAAB "
+              \n-Path Scripts: $pathScripts \n-Path Keystore: $keystorePath \n-Path diretório AAB: $pathToRoot "
 
 print_blue "\n\n*** Processo ... $automatico\n\n\n"
 sleep 10
@@ -58,10 +65,10 @@ builddingApkAndAAB() {
   # rm $pathProject/app/google-services.json
 
   cd $pathProject/
-  cp $keystorePath/$nomeDaKeystore.keystore $pathToAAB/
+  cp $keystorePath/$nomeDaKeystore.keystore $pathToRoot/
 
-  echo -e "Para ver uma lista de todas as tarefas de compilação disponíveis para seu projeto, execute ./gradlew tasks \n"
-  print_green "$(./gradlew tasks)\n\n"
+  echo "Para ver uma lista de todas as tarefas de compilação disponíveis para seu projeto, execute $(print_green "./gradlew tasks") \n"
+  # print_green "$(./gradlew tasks)\n\n"
 
   print_blue "\n\n-> Rodando ./gradlew clean \nRemove ./build\n\n"
   ./gradlew clean
@@ -101,25 +108,25 @@ builddingApkAndAAB() {
   # mv ./$BUILD_APK_UNSIGNED.apk ./$BUILD.apk
   mv ./$BUILD.apk $pathProject/app/build/outputs/apk/release/
   rm ./$nomeDaKeystore.keystore
-  # ~/Library/Android/sdk/build-tools/29.0.3/apksigner sign --ks ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Keystores/invictuscontrol.keystore --ks-key-alias invictus --ks-pass pass:invictuscontrol5977 --key-pass pass:invictuscontrol5977 ./app-release.apk
+  # ~/Library/Android/sdk/build-tools/29.0.3/apksigner sign --ks ~/Documents/Products_Customs/Keystores//invictuscontrol.keystore --ks-key-alias invictus --ks-pass pass:invictuscontrol5977 --key-pass pass:invictuscontrol5977 ./app-release.apk
 
   cd $pathProject/app/build/outputs/apk/release/
-  print_blue "\n\n-> Movendo de: \n$pathProject/app/build/outputs/apk/release/$BUILD.apk para: \n$pathToAAB\n"
-  mv ./$BUILD.apk $pathToAAB # Movendo o APK para o path do Scripts/AABTolls
+  print_blue "\n\n-> Movendo de: \n$pathProject/app/build/outputs/apk/release/$BUILD.apk para: \n$pathToRoot\n"
+  mv ./$BUILD.apk $pathToRoot # Movendo o APK para o path do Scripts/AABTolls
 
   cd $pathProject/app/build/outputs/apk/debug
-  print_blue "\n\n-> Movendo de: \n$pathProject/app/build/outputs/apk/debug/app-debug.apk para: \n$pathToAAB\n"
-  mv ./app-debug.apk $pathToAAB
+  print_blue "\n\n-> Movendo de: \n$pathProject/app/build/outputs/apk/debug/app-debug.apk para: \n$pathToRoot\n"
+  mv ./app-debug.apk $pathToRoot
 
   # ---------------------------------------------------------------------------------------------------------
   cd $pathProject
   print_blue "\n\n-> GERANDO .aab \nBuild estará em: ./app/build/outputs/bundle/release/$BUILD_AAB_UNSIGNED.aab\n"
   ./gradlew bundleRelease
 
-  print_blue "\n\n-> Movendo de: \n$pathProject/app/build/outputs/bundle/release/$BUILD.aab para: \n$pathToAAB\n"
-  mv $pathProject/app/build/outputs/bundle/release/$BUILD_AAB_UNSIGNED.aab $pathToAAB/$BUILD.aab
+  print_blue "\n\n-> Movendo de: \n$pathProject/app/build/outputs/bundle/release/$BUILD.aab para: \n$pathToRoot\n"
+  mv $pathProject/app/build/outputs/bundle/release/$BUILD_AAB_UNSIGNED.aab $pathToRoot/$BUILD.aab
 
-  cd $pathToAAB
+  cd $pathToRoot
   print_blue "\n\n-> Assinando o .aab ($BUILD_AAB_UNSIGNED.aab) \n\n"
   afplay /System/Library/Sounds/Blow.aiff
   # print_light_red "Insira a chave(Keystore)"
@@ -168,12 +175,12 @@ installAppInDevice() {
 }
 
 movingBuildsToProject() {
-  cd $pathToAAB
+  cd $pathToRoot
   print_light_red "\n\n\n---------      Movendo os BUILDS(.apk(release/debug), .aab)      ---------\n\n"
   sleep 5
-  mv ./$BUILD.aab ./Projetos/"$projeto"/"BUILDS"/Android/"$buildName"_"$versionCode".aab
-  mv ./$BUILD.apk ./Projetos/"$projeto"/"BUILDS"/Android/"$buildName"_"$versionCode".apk
-  mv ./app-debug.apk ./Projetos/"$projeto"/"BUILDS"/Android/
+  mv ./$BUILD.aab ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/"$buildName"_"$versionCode".aab
+  mv ./$BUILD.apk ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/"$buildName"_"$versionCode".apk
+  mv ./app-debug.apk ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/
   rm $nomeDaKeystore.keystore
   rm $BUILDS.apks #arquivo pesado, necessário somente na hora de instalar ...
 }

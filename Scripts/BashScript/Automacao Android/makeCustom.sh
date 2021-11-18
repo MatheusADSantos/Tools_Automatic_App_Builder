@@ -3,31 +3,24 @@
 print_light_gray() {
 	printf "\e[0;37m$1\e[0m"
 }
-
 print_red() {
 	printf "\e[0;31m$1\e[0m"
 }
-
 print_light_red() {
 	printf "\e[1;31m$1\e[0m"
 }
-
 print_blue() {
 	printf "\e[0;34m$1\e[0m"
 }
-
 print_light_blue() {
 	printf "\e[1;34m$1\e[0m"
 }
-
 print_green() {
 	printf "\e[0;32m$1\e[0m"
 }
-
 print_light_green() {
 	printf "\e[1;32m$1\e[0m"
 }
-
 # sh $pathScripts/makeCustom.sh "$nome" "$bundle" "#$cor1" "$alias" "$passwordDaKeystore1" "$passwordDaKeystore2" "$nomeDaKeystore"
 # makeCustom.sh "teste" "br.com.teste" "#000" "teste" "teste123" "teste123" "testekeystore"
 
@@ -39,20 +32,20 @@ passwordDaKeystore1=$5
 passwordDaKeystore2=$6
 nomeDaKeystore=$7
 
-print_red "\n\n>>> DADOS PARA CUSTOMIZAR <<<"
+print_red "\n\n>>> Datas for custom <<<"
 print_blue "\n\n- Nome do App: $appName \n- Bundle: $bundle \n- Cor: $cor \n- Alias: $alias 
 \n- Password1: $passwordDaKeystore1 \n- Password2: $passwordDaKeystore2 \n- Nome da Keystore: $nomeDaKeystore "
 print_red "\n\n\n                    >>>ATENÇÃO<<< \n... Aguardando 10 segundos pra conferir os dados ...\n\n"
 sleep 10
 
 pathScripts=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript
-pathToAAB=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/
-pathImagens=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Imagens
-keystorePath=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/AABTolls/Keystores
+pathToRoot=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/
+pathImagens=~/Documents/Products_Customs/Imagens/
+keystorePath=~/Documents/Products_Customs/Keystores/
 pathProject=~/Documents/Fulltrack/FMobile6_Android #pode excluir!!!!!!!
 
 changeAppName() {
-	print_red "\n\n\n---------------------------------- App Name ----------------------------------"
+	print_red "\n\n_______ App Name "
 	cd $pathProject/app/src/main/res/values/ # cd /Users/macbook-estagio/Documents/Fulltrack/FMobile6_Android/app/src/main/res/values
 	awk -F '[<>]' '//{print}' strings.xml | awk -v varAppName="$appName" '{sub(/FMobile/,varAppName); print}' >>strings_2.xml
 	rm strings.xml
@@ -60,7 +53,7 @@ changeAppName() {
 }
 
 structuringFoldersAndReplaceAllOccurrencesFromBundle() {
-	print_red "\n\n\n----------------- Structuring folders according to the BUNDLE ----------------- \n -------------------AND Replacing all occurrences of the BUNDLE -------------------\n\n"
+	print_red "\n\n_______ Structuring folders according to the BUNDLE and Replace all occurrences of bundle..."
 
 	# Criando a estrutura de pastas de acordo com o bundle e Migrar os arquivos dentro da hierarquia de pastas ...
 	bundleWithoutDot=$(echo "$bundle" | awk 'gsub(/\./," ")') # Pegar o $bundle e separar os nomes pelos (.) Ex: br.com.teste -> cria pasta br, com e teste ...
@@ -78,17 +71,14 @@ structuringFoldersAndReplaceAllOccurrencesFromBundle() {
 	cd $bundle2
 	mkdir $bundle3
 
-	# $([[ $bundle4 != '' ]] && cd $bundle3 || echo 'Só vai até o bundle3 ....')
-
 	if [[ $bundle4 != '' ]]; then
 		cd $bundle3
 		mkdir $bundle4
-		print_green "Agora preciso migrar as pastas que estavam em $pathProject/app/src/main/java/com/fulltrack/fmobile pra "
+		print_green "Now I need to migrate the folders that were in $pathProject/app/src/main/java/com/fulltrack/fmobile to "
 		print_light_green "\n$pathProject/app/src/main/java/$bundle1/$bundle2/$bundle3/$bundle4/"
 		mv $pathProject/app/src/main/java/com/fulltrack/fmobile/* $pathProject/app/src/main/java/$bundle1/$bundle2/$bundle3/$bundle4/
-		# mv ~/Documents/Fulltrack/FMobile6_Android/app/src/main/java/com/fulltrack/fmobile/* ~/Documents/Fulltrack/FMobile6_Android/app/src/main/java/br/com/teste
 	else
-		print_green "Agora preciso migrar as pastas que estavam em $pathProject/app/src/main/java/com/fulltrack/fmobile pra "
+		print_green "Now I need to migrate the folders that were in $pathProject/app/src/main/java/com/fulltrack/fmobile to "
 		print_light_green "\n$pathProject/app/src/main/java/$bundle1/$bundle2/$bundle3/"
 		mv $pathProject/app/src/main/java/com/fulltrack/fmobile/* $pathProject/app/src/main/java/$bundle1/$bundle2/$bundle3/
 	fi
@@ -97,40 +87,29 @@ structuringFoldersAndReplaceAllOccurrencesFromBundle() {
 	rm -rf ./com
 }
 
-verifyIfExistKeystore() {
-	print_blue "\n\nVerificando se já existe a keystore: ($nomeDaKeystore)"
+verifyKeystoreAndMakeIt() {
+	print_red "\n\n_______ Create/Replace Keystore "
+	print_blue "\n\nChecking if a keystore($nomeDaKeystore) already exists..."
 	cd $keystorePath
 	touch keystores.txt            #Criando projetos.txt
 	printf "$(ls)" >>keystores.txt #Inserindo o conteúdo no projetos.txt
-	# keystores=$(awk '//{print}' keystores.txt)
 	keystore=$(grep "$nomeDaKeystore" keystores.txt)
 	rm keystores.txt
 
-	# if [[ $keystore != '' ]]; then
 	if [[ $keystore == "$nomeDaKeystore.keystore" ]]; then
-		print_blue "\n\nKeystore já existe!!! \nKeystore: $keystore"
+		print_blue "\n\nKeystore already exists!!! \nKeystore: $keystore"
 	else
-		print_light_red "\n\nKeystore não existe, gerando uma ..."
+		print_light_red "\n\nKeystore doesn't exixst, generate one..."
 		sh $pathScripts/generatorKeystore.sh $nomeDaKeystore $alias $passwordDaKeystore1
-		print_green "\n\nKeystore gerada!!! \nEm: $(pwd) -> $keystore \n\nTemos: \n$(ls)"
+		print_green "\n\nKeystore generated!!! \nIn: $(pwd) -> $keystore \n\nWe have: \n$(ls)"
 	fi
 
 	cp $nomeDaKeystore.keystore $pathProject/$nomeDaKeystore.keystore
-	# cp $nomeDaKeystore.keystore $pathToAAB/
-}
-
-makeKeystoreAndReplaceInProject() {
-	print_red "\n\n\n--------------------------- Create/Replace Keystore ---------------------------\n"
-
-	verifyIfExistKeystore
-
-	# # # SUBSTITUINDO TODAS AS OCORRENCIAS DO BUNDLE ...
-	# $(find . \( ! -regex '.*/\..*' \) -type f | xargs perl -pi -e "s/com.fulltrack.fmobile/$bundle/g;")
 }
 
 updateColors() {
 	#  <color name="colorAccent">#CF1C26</color>
-	print_red "\n\n\n------------------------------ Update the Colors ------------------------------\n\n"
+	print_red "\n\n_______ Update the Colors "
 	cd $pathProject/app/src/main/res/values/
 	awk -F '[<>]' '//{print}' colors.xml | awk -v varColor="$cor" '{sub(/#CF1C26/,varColor); print}' >>colors_2.xml
 	rm colors.xml
@@ -138,16 +117,16 @@ updateColors() {
 }
 
 updateImages() {
-	print_red "\n\n\n------------------------------- Update Images -------------------------------\n\n"
+	print_red "\n\n_______ Update Images"
 	afplay /System/Library/Sounds/Blow.aiff
-	osascript -e 'display alert "ATENÇÃO!" message "Verifique se já está com TODAS as imagens em ~/Downloads 
-	\niconApp/iconStore/banner/splash \nPastas:res/ic_launcher/ic_launcher_round/ic_launcher_foreground" '
+	osascript -e 'display alert "Atention!" message "Make sure you have ALL images in: ~/Downloads like: 
+	\niconApp/iconStore/banner/splash \nFolders:res/ic_launcher/ic_launcher_round/ic_launcher_foreground" '
 
-	print_light_red "\n\nVerifique se já está com TODAS as imagens/pastas em ~/Downloads/ ...\n"
-	echo -e "IMAGENS: \n- icon \n- iconStore \n- ic_logo_autenticacao \n- banner 
+	print_light_red "\n\nMake sure you have ALL the images in: ~/Downloads/ ...\n"
+	echo -e "IMAGENS: \n- iconApp \n- iconStore \n- ic_logo_autenticacao \n- banner 
 	\nPASTAS: \n- res \n- ic_launcher \n- ic_launcher_round \n- ic_launcher_foreground"
 
-	# Movendo as imagensf
+	print_light_blue "\n\n-> Moving images..."
 	cp ~/Downloads/splash.png ~/Downloads/ic_logo_autenticacao.png
 	cp ~/Downloads/ic_logo_autenticacao.png $pathImagens
 	cp ~/Downloads/iconApp.png $pathImagens
@@ -156,120 +135,53 @@ updateImages() {
 	cp -R ~/Downloads/res/ $pathImagens/
 	sleep 10
 
-	# print_light_blue "\n\n-> Deletando a pasta <mimap-anydpi-v26> \nObs: Se o icone não estiver em xml\n"
-	# # cd $pathProject/app/src/main/res/mimap-anydpi-v26
-	# cd $pathProject/app/src/main/res/
-	# rm -rf ./mipmap-anydpi-v26
-
-	print_light_blue "\n\n-> Substituindo a pasta <mimap-anydpi-v26>"
+	print_light_blue "\n\n-> Replacing the folder(mimap-anydpi-v26)..."
 	cd $pathProject/app/src/main/res/
 	rm -rf ./mipmap-anydpi-v26
 	cp -R $pathImagens/mipmap-anydpi-v26 $pathProject/app/src/main/res/
 
-	print_light_blue "\n\n-> Trocando a logo de autenticação ..."
+	print_light_blue "\n\n-> Replacing the authentication logo..."
 	rm $pathProject/app/src/main/res/drawable-mdpi/ic_logo_autenticacao.xml
 	cp $pathImagens/ic_logo_autenticacao.png $pathProject/app/src/main/res/drawable-mdpi/
 
-	# print_light_blue "\n\n-> Trocando o Splash ..."
-	# cp $pathImagens/splash_logo.png $pathProject/app/src/main/res/drawable/
-
-	# print_light_blue "\n\n-> Movendo os icones do app - ic_launcher"
-	# cp $pathImagens/mipmap-hdpi/ic_launcher.png $pathProject/app/src/main/res/mipmap-hdpi/
-	# cp $pathImagens/mipmap-mdpi/ic_launcher.png $pathProject/app/src/main/res/mipmap-mdpi/
-	# cp $pathImagens/mipmap-xhdpi/ic_launcher.png $pathProject/app/src/main/res/mipmap-xhdpi/
-	# cp $pathImagens/mipmap-xxhdpi/ic_launcher.png $pathProject/app/src/main/res/mipmap-xxhdpi/
-	# cp $pathImagens/mipmap-xxxhdpi/ic_launcher.png $pathProject/app/src/main/res/mipmap-xxxhdpi/
-
-	# print_light_blue "\n\n-> Movendo os icones do app - ic_launcher_round"
-	# cp $pathImagens/mipmap-hdpi/ic_launcher_round.png $pathProject/app/src/main/res/mipmap-hdpi/
-	# cp $pathImagens/mipmap-mdpi/ic_launcher_round.png $pathProject/app/src/main/res/mipmap-mdpi/
-	# cp $pathImagens/mipmap-xhdpi/ic_launcher_round.png $pathProject/app/src/main/res/mipmap-xhdpi/
-	# cp $pathImagens/mipmap-xxhdpi/ic_launcher_round.png $pathProject/app/src/main/res/mipmap-xxhdpi/
-	# cp $pathImagens/mipmap-xxxhdpi/ic_launcher_round.png $pathProject/app/src/main/res/mipmap-xxxhdpi/
-
-	# print_light_blue "\n\n-> Movendo os icones do app - ic_launcher_foreground"
-	# cp $pathImagens/mipmap-hdpi/ic_launcher_foreground.png $pathProject/app/src/main/res/mipmap-hdpi/
-	# cp $pathImagens/mipmap-mdpi/ic_launcher_foreground.png $pathProject/app/src/main/res/mipmap-mdpi/
-	# cp $pathImagens/mipmap-xhdpi/ic_launcher_foreground.png $pathProject/app/src/main/res/mipmap-xhdpi/
-	# cp $pathImagens/mipmap-xxhdpi/ic_launcher_foreground.png $pathProject/app/src/main/res/mipmap-xxhdpi/
-	# cp $pathImagens/mipmap-xxxhdpi/ic_launcher_foreground.png $pathProject/app/src/main/res/mipmap-xxxhdpi/
-
-	# print_light_blue "\n\n-> Movendo os icones de push"
-	# cp $pathImagens/drawable-hdpi/ic_push_notification_default.png $pathProject/app/src/main/res/drawable-hdpi/
-	# cp $pathImagens/drawable-mdpi/ic_push_notification_default.png $pathProject/app/src/main/res/drawable-mdpi/
-	# cp $pathImagens/drawable-xhdpi/ic_push_notification_default.png $pathProject/app/src/main/res/drawable-xhdpi/
-	# cp $pathImagens/drawable-xxhdpi/ic_push_notification_default.png $pathProject/app/src/main/res/drawable-xxhdpi/
-	# cp $pathImagens/drawable-xxxhdpi/ic_push_notification_default.png $pathProject/app/src/main/res/drawable-xxxhdpi/
-
-	# ----------------------------------------------------------------------------------------------------------------------------------------
-
-	print_light_blue "\n\n-> Movendo os icones de push"
+	print_light_blue "\n\n-> Replacing push icons..."
 	cp $pathImagens/drawable-hdpi/ic_push_notification_default.png $pathProject/app/src/main/res/drawable-hdpi/
 	cp $pathImagens/drawable-mdpi/ic_push_notification_default.png $pathProject/app/src/main/res/drawable-mdpi/
 	cp $pathImagens/drawable-xhdpi/ic_push_notification_default.png $pathProject/app/src/main/res/drawable-xhdpi/
 	cp $pathImagens/drawable-xxhdpi/ic_push_notification_default.png $pathProject/app/src/main/res/drawable-xxhdpi/
 	cp $pathImagens/drawable-xxxhdpi/ic_push_notification_default.png $pathProject/app/src/main/res/drawable-xxxhdpi/
 
-	print_light_blue "\n\n-> Movendo TODOS icones do app - \nic_launcher/ic_launcher_round/ic_launcher_foreground\nE seus: adaptive_fore e adaptive_back"
+	print_light_blue "\n\n-> Moving all app icons - \nic_launcher/ic_launcher_round/ic_launcher_foreground\nAnd yours: adaptive_fore e adaptive_back"
 	cp $pathImagens/mipmap-hdpi/* $pathProject/app/src/main/res/mipmap-hdpi/
 	cp $pathImagens/mipmap-mdpi/* $pathProject/app/src/main/res/mipmap-mdpi/
 	cp $pathImagens/mipmap-xhdpi/* $pathProject/app/src/main/res/mipmap-xhdpi/
 	cp $pathImagens/mipmap-xxhdpi/* $pathProject/app/src/main/res/mipmap-xxhdpi/
 	cp $pathImagens/mipmap-xxxhdpi/* $pathProject/app/src/main/res/mipmap-xxxhdpi/
-
-	# print_light_blue "\n\n-> Movendo os icones do app - ic_launcher_round"
-	# cp $pathImagens/mipmap-hdpi/ic_launcher_round.png $pathProject/app/src/main/res/mipmap-hdpi/
-	# cp $pathImagens/mipmap-mdpi/ic_launcher_round.png $pathProject/app/src/main/res/mipmap-mdpi/
-	# cp $pathImagens/mipmap-xhdpi/ic_launcher_round.png $pathProject/app/src/main/res/mipmap-xhdpi/
-	# cp $pathImagens/mipmap-xxhdpi/ic_launcher_round.png $pathProject/app/src/main/res/mipmap-xxhdpi/
-	# cp $pathImagens/mipmap-xxxhdpi/ic_launcher_round.png $pathProject/app/src/main/res/mipmap-xxxhdpi/
-
-	# print_light_blue "\n\n-> Movendo os icones do app - ic_launcher_foreground"
-	# cp $pathImagens/mipmap-hdpi/ic_launcher_foreground.png $pathProject/app/src/main/res/mipmap-hdpi/
-	# cp $pathImagens/mipmap-mdpi/ic_launcher_foreground.png $pathProject/app/src/main/res/mipmap-mdpi/
-	# cp $pathImagens/mipmap-xhdpi/ic_launcher_foreground.png $pathProject/app/src/main/res/mipmap-xhdpi/
-	# cp $pathImagens/mipmap-xxhdpi/ic_launcher_foreground.png $pathProject/app/src/main/res/mipmap-xxhdpi/
-	# cp $pathImagens/mipmap-xxxhdpi/ic_launcher_foreground.png $pathProject/app/src/main/res/mipmap-xxxhdpi/
 }
 
 replaceAllOccurenceBundleAndRemoveIDEAandGRADLE() {
 	cd $pathProject
-
-	print_red "\n\nSUBSTITUINDO TODAS AS OCORRENCIAS DO BUNDLE ... \nE removendo o workspace.xml\n\n"
-
-	# cd .idea/
-	# rm workspace.xml
+	print_red "\n\n_______ REPLACING ALL BUNDLE OCCURRENCES... \n_______ And removing the workspace.xml\n\n"
 
 	$(find . \( ! -regex '.*/\..*' \) -type f | xargs perl -pi -e "s/com.fulltrack.fmobile/$bundle/g;") # SUBSTITUINDO TODAS AS OCORRENCIAS DO BUNDLE ...
 
 	rm -rf .idea
 	rm -rf .gradle
-
-	# cd .idea/
-	# $(find . \( ! -regex '.*/\..*' \) -type f | xargs perl -pi -e "s/com.fulltrack.fmobile/$bundle/g;")
-	# $(find . \( ! -regex '.*/\..*' \) -type f | xargs perl -pi -e "s/com\/fulltrack\/fmobile/$bundle1\/$bundle2\/$bundle3/g;")
-	# $(find . \( ! -regex '.*/\..*' \) -type f | xargs perl -pi -e "s/C:\Users\\danie\\AndroidStudioProjects\\FMobileAndroid\/~\/Documents\/Fulltrack\/FMobile6_Android\/g;") - PRECISA ARRUMAR SE FOR USAR
-	# C:\Users\danie\AndroidStudioProjects\FMobileAndroid
-	# cd ..
-
-	# print_red "\n\nABRINDO O ANDROID STUDIO"
-	# open -a Android\ Studio
-	# sleep 20
 }
 
 uploadFileGoogleService() {
-	print_red "\n\n\n---------------------- Upload File google-services.json ----------------------\n"
+	print_red "\n\n_______ Upload File google-services.json "
 	cp ~/Downloads/google-services.json $pathProject/app/
-	cp ~/Downloads/google-services.json $pathToAAB
+	cp ~/Downloads/google-services.json $pathToRoot
 	echo -e "\n\n\n"
 }
 
 openAndroidStudio() {
-	print_light_red "\n\nABRINDO O ANDROID STUDIO..."
+	print_light_red "\n\n_______ Opening the ANDROID STUDIO..."
 	open -a Android\ Studio $pathProject
 	sleep 20
 	afplay /System/Library/Sounds/Blow.aiff
-	print_light_gray "\nJá sincronizou o projeto??? \nSe SIM de um 'return' pra continuar ..."
+	print_light_gray "\nAlready synchronized the project??? \nIf YES, then take a return to continue..."
 	read sincronizou
 }
 
@@ -279,7 +191,7 @@ makeCustom() {
 
 	structuringFoldersAndReplaceAllOccurrencesFromBundle
 
-	makeKeystoreAndReplaceInProject
+	verifyKeystoreAndMakeIt
 
 	updateColors
 

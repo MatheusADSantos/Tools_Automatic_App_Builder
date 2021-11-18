@@ -1,137 +1,86 @@
 # !/bin/bash -i
 
-# Black        0;30     Dark Gray     1;30
-# Red          0;31     Light Red     1;31
-# Green        0;32     Light Green   1;32
-# Brown/Orange 0;33     Yellow        1;33
-# Blue         0;34     Light Blue    1;34
-# Purple       0;35     Light Purple  1;35
-# Cyan         0;36     Light Cyan    1;36
-# Light Gray   0;37     White         1;37
+# {$print_red "DEU CERTO POHA"}
+# $({$print_green "DEU CERTO POHA"})
+# sleep 54
 
-print_light_gray() {
-  printf "\e[1;37m$1\e[0m"
-}
+source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/envAutomationWebScript/bin/activate
+
+# Customs do FMobile 5.0
+# automationCustomFMobile6ANDROID.sh "velha" "alias" "nomeDaKeystore" "senha1" "senha2" "bundleAndroid" "bundleIOS"
 
 print_red() {
   printf "\e[0;31m$1\e[0m"
 }
-
 print_light_red() {
   printf "\e[1;31m$1\e[0m"
 }
-
 print_blue() {
   printf "\e[0;34m$1\e[0m"
 }
-
 print_light_blue() {
   printf "\e[1;34m$1\e[0m"
 }
-
 print_green() {
   printf "\e[0;32m$1\e[0m"
 }
-
 print_light_green() {
   printf "\e[1;32m$1\e[0m"
 }
 
 print_light_red "\n\n*********************************\nComeçando às $(date +%F\ %T)\n*********************************"
-
 print_green "\n\n--------------------------------------------------------------------------------------"
 print_green "\n\n-------------------  $(print_light_green "AUTOMAÇÃO DE CUSTOMIZAÇÃO FMOBILE 6.0 ANDROID")  $(print_green "------------------")"
 print_green "\n\n--------------------------------------------------------------------------------------"
 
-gitCheck() {
-  print_light_red "\n\n\n------------------------- Checking Status from GIT -------------------------\n\n"
-  newProjectOrUpdate=$1
-  cd $pathProject
-  status=$(git status | grep "nothing to commit, working tree clean")
+customJaExistia=$1
+alias=$2
+nomeDaKeystore=$3
+passwordDaKeystore1=$4
+passwordDaKeystore2=$5
 
-  while [[ $status != 'nothing to commit, working tree clean' ]]; do
-    echo -e "\nPlease, verify your tree from git ... then continue your custom ..."
+bundle=$6
+bundleIOS=$7
 
-    afplay /System/Library/Sounds/Blow.aiff
-    osascript -e 'display alert "ATENÇÃO!" message "Verifique sua arvore na branch $(git branch)!"'
+# echo -e "\n\nEscolha o projeto $(pwd)"
+# read projeto
+# pathPorjeto="~/Documents/Products_Customs/Projetos/$projeto/BUILDS/"
 
-    status=$(git status | grep "nothing to commit, working tree clean")
-  done
-
-  if [[ $newProjectOrUpdate == 'novo' || $newProjectOrUpdate == 'n' ]]; then
-    afplay /System/Library/Sounds/Blow.aiff
-    osascript -e 'display alert "ATENÇÃO!" message "Verifique se está conectado na VPN"'
-    git checkout master
-    git pull
-    sleep 5
-
-    print_blue "\n-> Defina um nome para a nova branch! \nExemplo (customNovaBranch)? \n"
-    read branch
-
-    # if [[ *$(git branch)* == "$branch" ]]; then
-    #   afplay /System/Library/Sounds/Blow.aiff
-    #   osascript -e 'display alert "ATENÇÃO!" message "Já existe uma branch com esse mesmo nome! \n\nClique em OK para dar um checkout nela."'
-    #   read resposta
-    #   echo "------> $resposta"
-    # fi
-
-    git checkout -b $branch
-    git checkout $branch
-  else
-    afplay /System/Library/Sounds/Blow.aiff
-    osascript -e 'display alert "ATENÇÃO!" message "Verifique se está conectado na VPN"'
-    git checkout master
-    git pull
-    sleep 5
-
-    print_blue "\n>>> BRANCHS EXISTENTES <<< \n$(print_green "$(git branch)") \n\n$(print_blue "-> Escolha a branch pra dar <checkout> ...")\n"
-    read branch
-    git checkout $branch
-  fi
-}
+# if [[ .gitignore == *$pathPorjeto* ]]; then
+#   echo "EXISTE"
+# else
+#   printf "\n~/Documents/Products_Customs/Projetos/$projeto/BUILDS/" >>../../.gitignore
+# fi
+# sleep 20
 
 enteringTheDatas() {
   print_light_red "\n\n\n\n\n--------------------      Entrando com os dados ...      --------------------"
   # Paths Uteis ...
-  # pathScripts=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/BashScript
-  # keystorePath=~/Documents/Products_Customs/Keystores/
-  # pathToRoot=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls #Path de onde está o script.ssh e o bundletool
-  # pathProject=~/Documents/Fulltrack/FMobile6_Android/               #$(pwd)
-  # PATH_APKSIGNER=~/Library/Android/sdk/build-tools/29.0.3/apksigner
-
-  # BUILD_APK_UNSIGNED=app-release-unsigned
-  # BUILD_AAB_UNSIGNED=app-release
-  # # builds=apps
-  # BUILD=app-release
-  # BUILDS=apps
-
-  # FMOBILE 5.0
-  pathScripts=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/BashScript
+  pathScripts=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript
   keystorePath=~/Documents/Products_Customs/Keystores/
-  pathToRoot=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls #Path de onde está o script.ssh e o bundletool
-  pathProject=~/Documents/Fulltrack/FMobileRN/android               #$(pwd)
+  pathToRoot=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/ #Path de onde está o script.ssh e o bundletool
+  pathProject=~/Documents/Fulltrack/FMobile6_Android/                                               #$(pwd)
   PATH_APKSIGNER=~/Library/Android/sdk/build-tools/29.0.3/apksigner
 
-  BUILD_APK_UNSIGNED=app-release
-  BUILD_AAB_UNSIGNED=app
-  # builds=apps
+  BUILD_APK_UNSIGNED=app-release-unsigned
+  BUILD_AAB_UNSIGNED=app-release
   BUILD=app-release
   BUILDS=apps
 
-  print_blue "\n\n-> NOVO(n) - Novo Projeto? OU \n-> ATUALIZAÇÃO(a) - Versão nova? \nObs: Entre com 'a' para atualizar ou 'n' para criar novo projeto\n"
+  print_blue "\n\n-> PROJETO NOVO OU ATUALIZAÇÃO? (N/A)\n"
   read newProjectOrUpdate
+  # sh $pathScripts/gitCheck.sh $newProjectOrUpdate $pathProject $bundle
 
-  # gitCheck $newProjectOrUpdate
+  if [[ $newProjectOrUpdate == 'novo' || $newProjectOrUpdate == 'n' || $newProjectOrUpdate == 'N' ]]; then
+    # CHAMAR SCRIPT(Python) PARA VERIFICAR SE ESTÁ COM TODOS OS DADOS/ARQUIVOS EM ~/Download
 
-  if [[ $newProjectOrUpdate == 'novo' || $newProjectOrUpdate == 'n' ]]; then
-    # Buscando os dados do infotxt
+    # Buscando os dados do info.txt
     cd ~/Downloads
     indice=$(awk '/Indice: /{print $0}' info.txt | awk '{sub(/Indice: /,""); print}')
     nome=$(awk '/Nome do App:/{print $0}' info.txt | awk '{sub(/Nome do App: /,""); print}')
     appName=$nome
     cor1=$(awk '/Cor1/{print $0}' info.txt | awk '{sub(/Cor1: /,""); print}')
-    cor2=$(awk '/Cor2/{print $0}' info.txt | awk '{sub(/Cor2: /,""); print}')
-    empresa=$(awk '/Empresa: /{print $0}' info.txt | awk '{sub(/Empresa:  /,""); print}')
+    empresa=$(awk '/Empresa: /{print $0}' info.txt | awk '{sub(/Empresa: /,""); print}')
     cliente=$(awk '/Cliente: /{print $0}' info.txt | awk '{sub(/Cliente: /,""); print}')
     email=$(awk '/Email: /{print $0}' info.txt | awk '{sub(/Email: /,""); print}')
     site=$(awk '/Site:/{print $0}' info.txt | awk '{sub(/Site: /,""); print}')
@@ -143,47 +92,40 @@ enteringTheDatas() {
     senhaIOS=$(awk '/Senha conta IOS: /{print $0}' info.txt | awk '{sub(/Senha conta IOS: /,""); print}')
     contatoTeste=$(awk '/Contato Teste: /{print $0}' info.txt | awk '{sub(/Contato Teste: /,""); print}')
 
-    # # alias=$("$nome" | awk '{print tolower($0)}' | awk '{sub(/ /,""); print}')
-    # alias=$(echo "$nome" | awk '{print tolower($0)}' | awk '{sub(/ /,""); print}')
-    # nomeDaKeystore=$alias
-    # passwordDaKeystore1=$alias$indice
-    # passwordDaKeystore2=$alias$indice
+    if [[ $customJaExistia == 'velha' ]]; then
+      print_light_red "\n\nDados da Keystore e Bundles do projeto antigo: "
+      echo -e "\n-$alias \n-$nomeDaKeystore \n-$passwordDaKeystore1 \n-$passwordDaKeystore2 \n-$bundle \n-$bundleIOS"
+      sleep 10
+    else
 
-    echo "Nome do Alias: "
-    read alias
-    nomeDaKeystore=$alias
+      for i in $(echo "$nome" | awk '{print tolower()}' | awk '{ gsub(/ó/,"o"); print }' ); do
+        alias+=$i
+      done
 
-    echo "Nome do password1: "
-    read passwordDaKeystore1
+      nomeDaKeystore=$alias
+      passwordDaKeystore1=$alias$indice
+      passwordDaKeystore2=$alias$indice
 
-    echo "Nome do password2: "
-    read passwordDaKeystore1
-
-    echo "Nome do bundle: "
-    read bundle
-    bundleAndroid=$bundle
-
-    # bundle="br.com.$alias"
-    # bundleAndroid=$bundle
+      bundle="br.com.$alias"
+      bundleAndroid=$bundle
+    fi
 
     print_light_red "\n                    >>> Observações <<< \nDados oriundos do setor COMERCIAL \nBuscando informações em ~/Downloads/info.txt ...\n"
-    print_blue "\nIndice: $indice \nNome do App: $nome \nCores: \nCor1:$cor1 e Cor2:$cor2 
+    print_blue "\nIndice: $indice \nNome do App: $nome \nCores: \nCor1:$cor1
     \nEmpresa: $empresa \nCliente: $cliente \nEmail: $email \nSite: $site \nTelefone: $telefone \nCopyright: $copyright 
     \nEmail Android: $emailAndroid \nSenha Android: $senhaAndroid \n\nEmail IOS: $emailIOS \nSenha IOS: $senhaIOS 
     \nKEYSTORE \nAlias: $alias \nNome da KeyStore: $nomeDaKeystore \nPasswords da Keystore(1/2): $passwordDaKeystore1//$passwordDaKeystore2
     \nBUNDLE: $bundle"
-    print_light_red "\n\n\n                    >>> ATENÇÃO <<< \n... Aguardando 10 segundos pra conferir os dados ...\n\n"
-    sleep 10
+    print_light_red "\n\n\n                    >>> ATENÇÃO <<< \nConferira os dados... \nDê return(enter) pra continuar!\n\n"
+    read conferido
 
     cd $pathProject/app
-    # Pegando onde ocorre versionName; Substituindo 'versionName ' por ''; Depois substitui os " por ''; por fim tirei os espaços
     versao=$(awk '/versionName/{print}' build.gradle | awk '{sub(/versionName /,""); print}' | awk '{sub(/"/,""); print}' | awk '{sub(/"/,""); print}' | awk '{ gsub (" ", "", $0); print}')
-    # Pegando somente onde ocorre o versionCode; Substituindo 'versionCode ' por ''; Pegando somente os números; Pegando somente a primeira linha do resultado total
     versionCode=$(awk '/versionCode/{print}' build.gradle | awk '{sub(/versionCode /,""); print}' | awk '{print($0+0)}' | awk 'NR==1{print $1}')
     echo -e "\n-> Versão: \n$versao \n\nversionCode: \n$versionCode"
 
     projeto="$indice"_"$nome"
-    projeto=$(echo "$projeto" | awk '{sub(/ /,"_"); print}') #Tive que tratar esse caso do nome do projeto ter espaço (indice_nome composto), Agora será (indice_nome_composto)
+    projeto=$(echo "$projeto" | awk '{ gsub(/ /,"_"); print }') #Tive que tratar esse caso do nome do projeto ter espaço (indice_nome composto), Agora será (indice_nome_composto)
 
     data=$(date +%F)
     hora=$(date +%T)
@@ -191,13 +133,16 @@ enteringTheDatas() {
 
     cd $pathToRoot
 
+    # Garantindo que o info.txt estará vazio
+    rm $pathToRoot/info.txt
+    rm $pathToRoot/info_"$projeto".html
+
     printf "
 >>> Data de Criação: $data às $hora <<<
 
 Indice: $indice
 Nome do App: $nome
 Cor1: $cor1
-Cor2: $cor2
 
 Empresa: $empresa
 Cliente: $cliente
@@ -216,17 +161,17 @@ Senha conta IOS: $senhaIOS
 ------------------------ DESENVOLVIMENTO ------------------------ 
 
 Loja Android: https://play.google.com/store/apps/details?id=$bundle
-Loja IOS: https://apps.apple.com/us/app/$appName/id$id#?platform=iphone
+Loja IOS: https://apps.apple.com/us/app/$appName/id$idIOS#?platform=iphone
 
 Contato Teste: $contatoTeste
 
 AliasDaKeyStore: $alias
 PasswordDaKeyStore1: $passwordDaKeystore1
-PasswordDaKeyStore2: $passwordDaKeystore1
+PasswordDaKeyStore2: $passwordDaKeystore2
 NomeDaKeyStore: $nomeDaKeystore
 
 Bundle Android: $bundle
-Bundle IOS: 
+Bundle IOS: $bundleIOS
 
 AppIDOnesignal: $appIDOnesignal
 
@@ -339,8 +284,7 @@ VersionCode: $versionCode na data $data
 				<div class='list-group'>
 					<a class='list-group-item'>
 						<h4 class='list-group-item-heading'>CORES</h4>
-						<p class='list-group-item-text'><strong>Cor1: </strong>#$cor1 </p>
-						<p class='list-group-item-text'><strong>Cor2: </strong>#$cor2 </p>
+						<p class='list-group-item-text'><strong>Cor: </strong>#$cor1 </p>
 					</a>
 					<a class='list-group-item'>
 						<h4 class='list-group-item-heading'>Keystore</h4>
@@ -438,23 +382,32 @@ VersionCode: $versionCode na data $data
 }
 enteringTheDatas
 
-ifNewGetDatasAndMakeCustom() {
-  if [[ $newProjectOrUpdate == 'novo' || $newProjectOrUpdate == 'n' ]]; then
-    print_red "\n\n\n----------------------------      Custom NOVA      ---------------------------- 
-    \n--------------------      Buscando arquivos da net ...      --------------------\n\n"
-    afplay /System/Library/Sounds/Blow.aiff
-    osascript -e 'display alert "ATENÇÃO!" message "Va no FIrebase e crie o .google-service baixe e adicione-o no projeto"'
+nomeDoApp=$(echo "$nome" | awk '{ gsub(/ /,""); print }')
+branch=$(echo "custom $nomeDoApp" | awk '{ gsub(/ /,""); print }')
+echo -e "\n\nChamando gitCheck.sh com a branch: $(print_light_red "$branch")"
+sleep 3
 
-    afplay /System/Library/Sounds/Blow.aiff
-    osascript -e 'display alert "ATENÇÃO!" message "Clique em http://fulltrack-tools.ftdata.com.br/CustomizacaoMobile para cadastrar a custom" '
-    # python $pathScripts/Python/gettingResourcesToAutomationcCustomFMobile.py
+sh $pathScripts/Utils/gitCheck.sh $newProjectOrUpdate $pathProject $bundle $branch
 
-    print_light_red "\n\n\n--------------------------      Customizando ...      --------------------------"
-    sh $pathScripts/makeCustom.sh "$nome" "$bundle" "$cor1" "$alias" "$passwordDaKeystore1" "$passwordDaKeystore2" "$nomeDaKeystore"
-    # makeCustom.sh teste br.com.teste teste teste123 teste123 testekeystore
-  fi
-}
-ifNewGetDatasAndMakeCustom
+# SE O PROJETO FOR DO 0, OU SEJA, NOVO, CHAMA-SE OS SCRIPTS EM PYTHON PARA PEGAR NO CASO AS IMAGENS E OS .JSON
+if [[ $newProjectOrUpdate == 'novo' || $newProjectOrUpdate == 'n' || $newProjectOrUpdate == 'N' ]]; then
+  # CRIANDO OS ARQUIVOS JSON
+  afplay /System/Library/Sounds/Blow.aiff
+  osascript -e 'display alert "ATENÇÃO!" message "Gerou os .json?" '
+  # sh $pathScripts/callScriptsPython.sh 'gerar jsons' $email
+
+  # CADASTRANDO A CUSTOM
+  afplay /System/Library/Sounds/Blow.aiff
+  osascript -e 'display alert "ATENÇÃO!" message "Clique em http://fulltrack-tools.ftdata.com.br/CustomizacaoMobile para cadastrar a custom" '
+
+  # GERANDO OS ICONES
+  # python $pathScripts/Python/generatorIcons.py $nome # Chamando direto pelo Python
+  sh $pathScripts/Automacao\ Android/callScriptsPython.sh 'gerar icons' "$nome"
+
+  # CUSTOMIZANDO
+  print_light_red "\n\n\n--------------------------      Customizando ...      --------------------------"
+  sh $pathScripts/Automacao\ Android/makeCustom.sh "$nome" "$bundle" "$cor1" "$alias" "$passwordDaKeystore1" "$passwordDaKeystore2" "$nomeDaKeystore"
+fi
 
 lookingDevicesAndIPAdress() {
   print_light_red "\n\n\n\n-----------------------      Looking Devices ...      ------------------------\n"
@@ -473,139 +426,14 @@ lookingDevicesAndIPAdress() {
 }
 lookingDevicesAndIPAdress
 
-# print_red "\n\nABRINDO O ANDROID STUDIO"
-# open -a Android\ Studio $pathProject # open -a Android\ Studio "Your Project Path"
-# sleep 180
+# MOSTRAR RELÁTÓRIO FINAL COM TODOS OS DADOS NECESSÁRIOS PARA INICIAR O BUILD
 
-builddingApkAndAAB() {
-  print_red "\n\n\nDOCUMENTAÇÕES: "
-  print_green "
-  \nCriar seu app na linha de comando:
-  \n- https://developer.android.com/studio/build/building-cmdline#DebugMode
-  \n- https://blog.usejournal.com/how-to-quickly-build-and-run-android-apks-using-an-automated-script-eb0e4a997d68
-  \n- ...
-  \n\nBundletoll:
-  \n- https://developer.android.com/studio/command-line/bundletool
-  \n\nZipalign: 
-  \n- https://android-developers.googleblog.com/2009/09/zipalign-easy-optimization.html?m=1
-  \n- https://developer.android.com/studio/command-line/zipalign
-  \n\nApksigner: 
-  \n- https://developer.android.com/studio/command-line/apksigner
-  \n\nGradle:
-  \n- https://docs.gradle.org/current/userguide/userguide.html\n"
-  sleep 5
-
-  print_light_red "\n\n\n------------------------     Iniciando o BUILD ...      ------------------------ \n\n"
-  sleep 2
-
-  cd $pathProject/
-  cp $keystorePath/$nomeDaKeystore.keystore $pathToRoot/
-
-  afplay /System/Library/Sounds/Blow.aiff
-  # osascript -e 'display alert "ATENÇÃO!" message "ATUALIZOU O PROJETO?"'
-  # osascript -e 'display alert "ATENÇÃO!" message "ATUALIZOU O PROJETO?"'
-
-  print_light_red "Atualizou o projeto com o plugin GRADLE para a versão 7.0.0 (y/n)? "
-  read atualizouGRADLE
-  while [[ $atualizouGRADLE != 'y' ]]; do
-    afplay /System/Library/Sounds/Blow.aiff
-    osascript -e 'display alert "ATENÇÃO!" message "Atualize seu projeto com o plugin GRADLE para versão 7.0.0"'
-    atualizouGRADLE='y'
-  done
-  print_green "Project build files are up-to-date for Android Gradle Plugin version 7.0.0"
-
-  print_light_red "\n\n\nPara ver uma lista de todas as tarefas de compilação disponíveis para seu projeto, execute ./gradlew tasks "
-  print_green "$(./gradlew tasks)\n\n"
-  sleep 3
-
-  print_blue "\n\n-> Rodando ./gradlew clean \nRemove ./build\n\n"
-  ./gradlew clean
-
-  print_blue "\n\n-> Rodando ./gradlew cleanBuildCache ... \n\n"
-  ./gradlew cleanBuildCache
-
-  print_blue "\n\n-> Rodando ./gradlew cleanBuild \nRemove ./app/build\n\n"
-  ./gradlew cleanBuild
-
-  print_blue "\n\n-> Rodando ./gradlew build"
-  ./gradlew build
-
-  # ---------------------------------------------------------------------------------------------------------
-  # Gera app-release-unsigned.apk em ./app/build/outputs/apk/release/app-release-unsigned.apk
-  print_blue "\n\n-> GERANDO .apk \nBuild estará em: ./app/build/outputs/apk/release/$BUILD_APK_UNSIGNED.apk\n"
-  rm ./app/build/outputs/apk/release/$BUILD_APK_UNSIGNED.apk
-  ./gradlew assembleRelease
-
-  print_blue "\n\n-> Assinando e Optimizando o .apk ($BUILD_APK_UNSIGNED.apk) \nApós assinado estára em: ./app/build/outputs/apk/release/$BUILD.apk\n\n"
-  mv $pathProject/app/build/outputs/apk/release/$BUILD_APK_UNSIGNED.apk ~/Library/Android/sdk/build-tools/29.0.3/app-release-unsigned.apk
-  cp $keystorePath/$nomeDaKeystore.keystore ~/Library/Android/sdk/build-tools/29.0.3/
-  cd ~/Library/Android/sdk/build-tools/29.0.3/
-
-  print_blue "\n\n-> Otimizando o .apk com o zipalign\n"
-  ./zipalign -v -p 4 ./app-release-unsigned.apk $BUILD.apk
-
-  afplay /System/Library/Sounds/Blow.aiff
-  print_light_red "\n\n\nVERIFIQUE"
-  read verificou
-
-  ./apksigner sign --ks $nomeDaKeystore.keystore --ks-key-alias $alias --ks-pass pass:$passwordDaKeystore1 --key-pass pass:$passwordDaKeystore2 $BUILD.apk
-  rm ./app-release-unsigned.apk
-
-  print_red "\n\nVerificando se o APK foi assinado ...\n\n"
-  ./apksigner verify ./$BUILD.apk
-  # mv ./app-release-unsigned.apk ./$BUILD.apk
-  mv ./$BUILD.apk $pathProject/app/build/outputs/apk/release/
-  rm ./$nomeDaKeystore.keystore
-  # ~/Library/Android/sdk/build-tools/29.0.3/apksigner sign --ks ~/Documents/Products_Customs/Keystores//invictuscontrol.keystore --ks-key-alias invictus --ks-pass pass:invictuscontrol5977 --key-pass pass:invictuscontrol5977 ./app-release.apk
-
-  cd $pathProject/app/build/outputs/apk/release/
-  print_blue "\n\n-> Movendo de: \n$pathProject/app/build/outputs/apk/release/$BUILD.apk para: \n$pathToRoot\n"
-  mv ./$BUILD.apk $pathToRoot # Movendo o APK para o path do Scripts/AABTolls
-
-  cd $pathProject/app/build/outputs/apk/debug
-  print_blue "\n\n-> Movendo de: \n$pathProject/app/build/outputs/apk/debug/app-debug.apk para: \n$pathToRoot\n"
-  mv ./app-debug.apk $pathToRoot
-
-  # ---------------------------------------------------------------------------------------------------------
-  cd $pathProject
-  print_blue "\n\n-> GERANDO .aab \nBuild estará em: ./app/build/outputs/bundle/release/$BUILD_AAB_UNSIGNED.aab\n"
-  ./gradlew bundleRelease
-
-  print_blue "\n\n-> Movendo de: \n$pathProject/app/build/outputs/bundle/release/$BUILD.aab para: \n$pathToRoot\n"
-  mv $pathProject/app/build/outputs/bundle/release/$BUILD_AAB_UNSIGNED.aab $pathToRoot
-
-  cd $pathToRoot
-  print_blue "\n\n-> Assinando o .aab ($BUILD_AAB_UNSIGNED.aab) \nApós assinado estára em: $pathToRoot/$BUILD.aab\n\n"
-  # java -jar bundletool-all-1.7.0.jar build-apks --bundle=$BUILD_AAB_UNSIGNED.aab --output=$BUILDS.apks --ks=$keystorePath/$nomeDaKeystore.keystore --ks-pass=pass:$passwordDaKeystore1 --ks-key-alias=$alias --key-pass=pass:$passwordDaKeystore2
-  java -jar bundletool-all-1.7.0.jar build-apks --bundle=$BUILD_AAB_UNSIGNED.aab --output=$BUILDS.apks --ks=$nomeDaKeystore.keystore --ks-pass=pass:$passwordDaKeystore1 --ks-key-alias=$alias --key-pass=pass:$passwordDaKeystore2
-
-  mv ./$BUILD_AAB_UNSIGNED.aab ./$BUILD.aab
-}
-builddingApkAndAAB
-
-installAppInDevice() {
-  print_blue "\n\n-> Desinstalando app($BUILD.apk) do device($device).... \n"
-  adb -s $device uninstall $bundle
-
-  print_blue "\n\n-> Desbloqueando Celular...\n"
-  sh $pathScripts/unlockDevice.sh 'instalar aplicativo'
-
-  # print_blue "\n\n-> Instalando o .apk assinado no device: \n$device \n\nEm: $(pwd) Temos: \n$(ls) \n\n\n"
-  print_blue "\n\n-> Instalando o .apk assinado no device: \n$device\n\n\n"
-  java -jar bundletool-all-1.7.0.jar install-apks --apks=$BUILDS.apks --device-id=$device
-  print_light_green "\n\n\n$nome.apk instalado no device: $device\n"
-
-  # print_blue "\n\n-> Instalando o .apk assinado no device: \n$device\n\n\n"
-  # adb -s $device install $BUILD.apk
-  # print_light_green "\n\n\n$nome.apk instalado no device: $device\n"
-}
-installAppInDevice
-
-movingProject() {
-  cd $pathToRoot
-  if [[ $newProjectOrUpdate == 'novo' || $newProjectOrUpdate == 'n' ]]; then
+# CRIAR PROJETO(DIRETÓRIO) E MOVENDO OS DADOS QUE ATÉ ENTÃO JÁ TEMOS ...
+CreateDirectoryToNewProject() {
+  if [[ $newProjectOrUpdate == 'novo' || $newProjectOrUpdate == 'n' || $newProjectOrUpdate == 'N' ]]; then
+    cd $pathToRoot
     print_light_red "\n\n\n------------------------       PROJETO NOVO!!!       -------------------------"
-    echo -e "\nCriando pasta do projeto e movendo os arquivos(.aab/.apk/.keystore/.txt(com as info))...\n\n"
+    echo -e "\nCriando pasta do projeto e movendo os arquivos(keystore, info.txt, info_Projeto.html, imagens ...\n\n"
 
     mkdir ~/Documents/Products_Customs/Projetos/"$projeto"
     mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/KEYSTORE
@@ -617,6 +445,7 @@ movingProject() {
     mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/IMAGENS/ImagensDoProjeto
     mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/IMAGENS/prints
     mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/IMAGENS/prints/Android
+    mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/IMAGENS/prints/Android/Loja
     mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/IMAGENS/prints/IOS
     mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/IMAGENS/prints/IOS/iPhone_5.5
     mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/IMAGENS/prints/IOS/iPhone_6.5
@@ -624,34 +453,39 @@ movingProject() {
 
     echo -e "\n\n>>> MOVENDO... \nEm: $(pwd)\n"
     mv ~/Documents/Products_Customs/Imagens/* ~/Documents/Products_Customs/Projetos/"$projeto"/"IMAGENS"/"ImagensDoProjeto"
-    mv ./google-services.json ~/Documents/Products_Customs/Projetos/"$projeto"/
+    # mv ./google-services.json ~/Documents/Products_Customs/Projetos/"$projeto"/
+    cp ~/Downloads/google-services.json ~/Documents/Products_Customs/Projetos/"$projeto"/
+
+    print_green "\nInserindo nova custom 6.0\n"
     printf "\n\n\n$projeto \n- Versão: $versao \n- versionCode: $versionCode \n- Data: $data" >>~/Documents/Products_Customs/Projetos/customs_fmobile_6.0.txt
 
-    mv ./$nomeDaKeystore.keystore ~/Documents/Products_Customs/Projetos/"$projeto"/"KEYSTORE"
-    mv ./info.txt ~/Documents/Products_Customs/Projetos/"$projeto"
-    mv ./info_"$projeto".html ~/Documents/Products_Customs/Projetos/"$projeto"
+    cp $keystorePath/$nomeDaKeystore.keystore ~/Documents/Products_Customs/Projetos/"$projeto"/"KEYSTORE"
+    mv $pathToRoot/info.txt ~/Documents/Products_Customs/Projetos/"$projeto"
+    mv $pathToRoot/info_"$projeto".html ~/Documents/Products_Customs/Projetos/"$projeto"
 
-    mv ./$BUILD.aab ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/"$nome"_"$versionCode".aab
-    mv ./$BUILD.apk ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/"$nome"_"$versionCode".apk
-    mv ./app-debug.apk ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/
-    rm $BUILDS.apks #arquivo pesado, necessário somente na hora de instalar ...
-  else
-    print_light_red "\n\n\n---------      Movendo apenas os BUILDS(.apk(release/debug), .aab)      ---------\n\n"
-    sleep 5
-    mv ./$BUILD.aab ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/"$nome"_"$versionCode".aab
-    mv ./$BUILD.apk ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/"$nome"_"$versionCode".apk
-    mv ./app-debug.apk ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/
-    rm $nomeDaKeystore.keystore
-    rm $BUILDS.apks #arquivo pesado, necessário somente na hora de instalar ...
+    printf "\n~/Documents/Products_Customs/Projetos/$projeto/BUILDS/" >>../../.gitignore
   fi
 }
-movingProject
+CreateDirectoryToNewProject
+
+# addingToGitignore() {
+#   print_light_red "\n\n\nAdicionando no .gitignore os BUILDS do projeto ...\n"
+#   $(git rm --cache -r ~/Documents/Products_Customs/Projetos/$projeto/BUILDS/)
+#   sleep 2
+#   printf "\n~/Documents/Products_Customs/Projetos/$projeto/BUILDS/" >> .gitignore
+#   $(git status -s)
+#   sleep 10
+# }
+# addingToGitignore
+
+# CHAMANDO O SCRIPT PRA BUILDAR, INSTALAR E MOVER PRO SEU RESPECTIVO DIRETÓRIO
+buildName=$(echo "$nome" | awk '{ gsub(" ", "_"); print }')
+sh $pathScripts/Automacao\ Android/buildInstallMovingAPKAAB.sh $pathProject $nomeDaKeystore $alias $passwordDaKeystore1 $passwordDaKeystore2 $projeto $buildName $versionCode 'automatico'
 
 takingPrints() {
   if [[ $newProjectOrUpdate == 'novo' || $newProjectOrUpdate == 'n' ]]; then
     print_light_red "\n\n\n------------------------      Tirando Prints ...      ------------------------"
-    # sh $pathScripts/takePrintsFromAndroid.sh $indice $versionFmobile
-    sh $pathScripts/takePrintsFromAndroid.sh $indice '6' $device
+    sh $pathScripts/Automacao\ Android/takePrintsFromAndroid.sh $indice '6' $device
   else
     afplay /System/Library/Sounds/Blow.aiff
     osascript -e 'display alert "ATENÇÃO!" message "Responda no terminal se quer tirar novos prints ..."'
@@ -661,15 +495,14 @@ takingPrints() {
 
     if [[ $takePrintsFromAndroid == 'y' ]]; then
       print_light_red "\n\n\n--------------------      Tirando Prints NOVAMENTE ...      --------------------"
-      # sh $pathScripts/takePrintsFromAndroid.sh $indice $versionFmobile
-      sh $pathScripts/takePrintsFromAndroid.sh $indice '6' $device
+      sh $pathScripts/Automacao\ Android/takePrintsFromAndroid.sh $indice '6' $device
     fi
   fi
 }
 takingPrints
 
 settingUpFences() {
-  print_light_red "\n\n\n---------------      Configurando Cercas pra testar os PUSH ...      ---------------"
+  print_light_red "\n\n\n---------------      Configurando Cercas pra testar os PUSH ...      ---------------\n"
   afplay /System/Library/Sounds/Blow.aiff
   osascript -e 'display alert "ATENÇÃO!" message "Responda no terminal se quer configurar o teste de push ..."'
 
@@ -680,7 +513,7 @@ settingUpFences() {
 
   if [[ $testPush == 'y' ]]; then
     echo -e "\n\n\n-> Configurando os testes de push ..."
-    sh $pathScripts/settingUpForPushTest.sh $indice $contatoTeste
+    sh $pathScripts/Automacao\ Android/settingUpForPushTest.sh $indice $contatoTeste
   fi
 }
 settingUpFences
@@ -690,18 +523,8 @@ uploadProjectToSeverFileSystem() {
   osascript -e 'display alert "ATENÇÃO!" message "SUBINDO OS ARQUIVOS PRO SERVIDOR ....."'
 
   # To Know more: https://learn.akamai.com/en-us/webhelp/netstorage/netstorage-user-guide/GUID-F9717DFA-6391-409B-8C47-8B0F9520854E.html
-  # print_light_red "\n\n\n--------------      Subindo Projeto "$nome"_"$versao" pro FileSystem ...      --------------"
   print_light_red "\n\n\n--------------      Subindo Projeto "$projeto" pro FileSystem ...      --------------"
-  print_blue "\n\n-> Abrindo o local onde ficam as custom no servidor (FileSystem) ..."
   open smb://192.168.1.14/mobile/FMobile/FMobile_6/Customs
-
-  # pathToBuildsAndroid=~/Documents/Products_Customs/Projetos/"$projeto"/BUILDS/Android # Path Correto: /Users/macbook-estagio/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos/5977_Invictus\ Control/BUILDS/Android
-  # print_red "\n\n\npathToBuildsAndroid (ERRADO): $pathToBuildsAndroid"
-  # pathToBuildsAndroid=$(echo "$pathToBuildsAndroid" | awk '{sub(/ /,"\\ "); print}') # Aqui estou inserindo a barra invertida(\) pra aceitar o espaço e pegar o path corretamente
-  # print_blue "\npathToBuildsAndroid (CORRETO): $pathToBuildsAndroid"
-  # echo -e "/Users/macbook-estagio/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos/5977_Invictus Control/BUILDS/Android" | awk '{sub(/ /,"\\ "); print}'
-
-  pathToBuildsAndroid=~/Documents/Products_Customs/Projetos/"$projeto"/BUILDS/Android
 
   if [[ $newProjectOrUpdate == 'novo' || $newProjectOrUpdate == 'n' ]]; then
     print_blue "\n\n-> Subindo o projeto TODO!"
@@ -711,10 +534,9 @@ uploadProjectToSeverFileSystem() {
     print_blue "\n\n-> Subindo apenas os BUILDS"
     echo -e "\n-> SENHA para acessar o servidor: $(print_green "yTYa@V@QJrtP")\n"
 
-    # scp /Users/macbook-estagio/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos/5977_Invictus\ Control/BUILDS/Android/app-release.aab matheussantos@192.168.1.14:/backups/Arquivos/Mobile/FMobile/FMobile_6/Customs/5977_Invictus_Control/BUILDS/Android/
-    print_red "\n\n\nCOMANDO SCP: scp $pathToBuildsAndroid/$BUILD.aab matheussantos@192.168.1.14:/backups/Arquivos/Mobile/FMobile/FMobile_6/Customs/"$projeto"/BUILDS/Android/ \n\n\n"
-    scp $pathToBuildsAndroid/"$nome"_"$versionCode".aab matheussantos@192.168.1.14:/backups/Arquivos/Mobile/FMobile/FMobile_6/Customs/"$projeto"/BUILDS/Android/
-    scp $pathToBuildsAndroid/"$nome"_"$versionCode".apk matheussantos@192.168.1.14:/backups/Arquivos/Mobile/FMobile/FMobile_6/Customs/"$projeto"/BUILDS/Android/
+    pathToBuildsAndroid=~/Documents/Products_Customs/Projetos/"$projeto"/BUILDS/Android
+    scp $pathToBuildsAndroid/"$buildName"_"$versionCode".aab matheussantos@192.168.1.14:/backups/Arquivos/Mobile/FMobile/FMobile_6/Customs/"$projeto"/BUILDS/Android/
+    scp $pathToBuildsAndroid/"$buildName"_"$versionCode".apk matheussantos@192.168.1.14:/backups/Arquivos/Mobile/FMobile/FMobile_6/Customs/"$projeto"/BUILDS/Android/
     scp $pathToBuildsAndroid/app-debug.apk matheussantos@192.168.1.14:/backups/Arquivos/Mobile/FMobile/FMobile_6/Customs/"$projeto"/BUILDS/Android/
   fi
 
@@ -723,8 +545,8 @@ uploadProjectToSeverFileSystem() {
 
   if [[ $remove == 'y' ]]; then
     print_blue "-> Removendo os builds(.aab e .apk) ...\n\n\n"
-    rm -rf $pathToBuildsAndroid/"$nome"_"$versionCode".aab
-    rm -rf $pathToBuildsAndroid/"$nome"_"$versionCode".apk
+    rm -rf $pathToBuildsAndroid/"$buildName"_"$versionCode".aab
+    rm -rf $pathToBuildsAndroid/"$buildName"_"$versionCode".apk
     rm -rf $pathToBuildsAndroid/app-debug.apk
   else
     print_blue "-> Não foram removidos os builds(.aab e .apk) ...\n\n\n"
@@ -748,12 +570,12 @@ uploadProjectToSeverFileSystem
 # bundle="br.com.mytracker" # bundle=$bundle
 # scheme="My Tracker" # scheme=$nome
 # project="900000_My Tracker" # project=$projeto
-# # cd ~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos
+# # cd ~/Documents/Products_Customs/Projetos/
 # # ls
 # # echo -e "Which project: "
 # # read project
-# pathBuildsProjectIOS=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos/$project/BUILDS/IOS
-# pathPrintsProjectIOS=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos/$project/IMAGENS/prints/IOS
-# pathScripts=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/BashScript
+# pathBuildsProjectIOS=~/Documents/Products_Customs/Projetos/$project/BUILDS/IOS
+# pathPrintsProjectIOS=~/Documents/Products_Customs/Projetos/$project/IMAGENS/prints/IOS
+# pathScripts=Scripts/BashScript
 
 # sh $pathScripts/takePrintsFromIOS.sh "$pathBuildsProjectIOS" "$pathPrintsProjectIOS" $bundle $scheme
