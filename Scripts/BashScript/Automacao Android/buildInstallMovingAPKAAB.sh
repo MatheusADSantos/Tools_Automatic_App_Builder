@@ -1,5 +1,5 @@
 # !/bin/bash -i
-source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/environmentAutomation/bin/activate
+source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/venvAutomation/bin/activate
 
 print_red() {
   printf "\e[0;31m$1\e[0m"

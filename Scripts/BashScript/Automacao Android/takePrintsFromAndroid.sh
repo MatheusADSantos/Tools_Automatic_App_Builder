@@ -22,10 +22,18 @@ print_light_green() {
   printf "\e[1;32m$1\e[0m"
 }
 
+# sh $pathScripts/Automacao\ Android/takePrintsFromAndroid.sh $indice '6' $device $contatoTeste
+
 indice=$1
 projectFmobile=$2
 device=$3
+contatoTeste=$4
 pathProjects=~/Documents/Products_Customs/Projetos
+
+print_light_red "\n\n\nAutomação Prints FMobile 6.0"
+print_green "\n*** Indice: $indice \n*** Projeto FMobile: $projectFmobile \n*** Device ID: $device \n*** Contato Teste: $contatoTeste"
+echo "(Se não tiver vai ser usado o default: 14123456789)"
+sleep 8
 
 dealWithPrints() {
   print_light_red "\n\nEntrando com os parametros: \n"
@@ -40,7 +48,7 @@ dealWithPrints() {
   fi
 
   searchingAndRemovingDevicePrints
-  
+
   # Removendo o cache do app
   adb -s $device shell pm clear $bundle
 }
@@ -162,8 +170,6 @@ getInformation() {
   fi
 }
 
-
-
 gettingPrintsFromFmobile6() {
   pathToScreenshots=sdcard/DCIM/Screenshots
   # https://developer.android.com/studio/command-line/adb -s $device#IntentSpec
@@ -179,14 +185,32 @@ gettingPrintsFromFmobile6() {
   sleep 4
   adb -s $device shell input tap 500 1013 # With icon(original)
   adb -s $device shell input tap 500 1025 # With icon(184x104)
-  adb -s $device shell input text "14123456789"
+
+  # adb -s $device shell input text "14123456789"
+
+  if [[ $contatoTeste == '' ]]; then
+    adb -s $device shell input text "14123456789"
+  else
+    adb -s $device shell input text $contatoTeste
+  fi
+
   adb -s $device shell input keyevent 66
 
   # Tela de autenticacao 2
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/Autenticacao2_"$bundle".png
   adb -s $device shell input tap 80 700
-  adb -s $device shell input text "54321"
+
+  # adb -s $device shell input text "54321"
+
+  if [[ $contatoTeste == '' ]]; then
+    adb -s $device shell input text "54321"
+  else
+    print_red "Qual o código? ...."
+    read codigo
+    adb -s $device shell input text $codigo
+  fi
+
   adb -s $device shell input keyevent 66
 
   # Tela grip principal com os rastreados
@@ -209,41 +233,41 @@ gettingPrintsFromFmobile6() {
   adb -s $device shell screencap $pathToScreenshots/Mais_"$bundle".png
 
   # Tela Detalhes do Rastreado
-  adb -s $device shell input tap 150 2250
-  sleep 2
-  adb -s $device shell input tap 1040 800
+  adb -s $device shell input tap 150 2250 # Indo pra lista de rastreados
+  sleep 5
+  adb -s $device shell input tap 800 400
   sleep 4
   adb -s $device shell screencap $pathToScreenshots/DetalhesDoRastreado_"$bundle".png
 
   # Tela Rastreado no mapa
-  adb -s $device shell input tap 540 1150
+  adb -s $device shell input tap 540 1100
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/RastreadoNoMapa_"$bundle".png
 
   # Tela Cerca Rápida
   adb -s $device shell input keyevent 4 #back
-  adb -s $device shell input tap 540 1450
+  adb -s $device shell input tap 540 1300
   sleep 6
   adb -s $device shell screencap $pathToScreenshots/CercaRapida_"$bundle".png
 
   # Tela Histórico de Posições
   adb -s $device shell input keyevent 4 #back
   sleep 4
-  adb -s $device shell input tap 540 1400
-  sleep 5
+  adb -s $device shell input tap 540 1450
+  sleep 7
   adb -s $device shell screencap $pathToScreenshots/HistoricoDePosicoes_"$bundle".png
 
   # Tela Permanencia em Ponto
   adb -s $device shell input keyevent 4 #back
   sleep 4
-  adb -s $device shell input tap 540 1600
+  adb -s $device shell input tap 540 1550
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/PermanenciaEmPonto_"$bundle".png
 
   # Tela Dados Consolidados
   adb -s $device shell input keyevent 4 #back
   sleep 4
-  adb -s $device shell input tap 540 1700
+  adb -s $device shell input tap 540 1650
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/DadosConsolidados_"$bundle".png
 
@@ -264,14 +288,14 @@ gettingPrintsFromFmobile6() {
   # Tela de Sensores
   adb -s $device shell input keyevent 4 #back
   sleep 4
-  adb -s $device shell input tap 540 2050
+  adb -s $device shell input tap 540 2000
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/Sensores_"$bundle".png
 
   # Tela de Manutenções Programadas
   adb -s $device shell input keyevent 4 #back
   sleep 4
-  adb -s $device shell input tap 540 2150
+  adb -s $device shell input tap 540 2200
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/ManutencoesProgramadas_"$bundle".png
 
@@ -280,7 +304,7 @@ gettingPrintsFromFmobile6() {
   sleep 4
   adb -s $device shell input swipe 100 1450 100 500 100
   sleep 3
-  adb -s $device shell input tap 540 2150
+  adb -s $device shell input tap 540 2200
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/BloquearVeiculos_"$bundle".png
 
@@ -288,7 +312,6 @@ gettingPrintsFromFmobile6() {
   adb -s $device shell input keyevent 4 #back
   adb -s $device shell input keyevent 4 #back
 }
-
 
 gettingPrintsFromFmobile5() {
   pathToScreenshots=sdcard/DCIM/Screenshots
@@ -368,7 +391,5 @@ gettingPrintsFromFmobile5() {
   adb -s $device shell input keyevent 4 #back
   adb -s $device shell input keyevent 4 #back
 }
-
-
 
 dealWithPrints

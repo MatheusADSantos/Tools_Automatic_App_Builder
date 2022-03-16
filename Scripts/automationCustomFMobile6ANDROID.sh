@@ -4,10 +4,12 @@
 # $({$print_green "DEU CERTO POHA"})
 # sleep 54
 
-source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/envAutomationWebScript/bin/activate
+source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/venvAutomation/bin/activate
 
 # Customs do FMobile 5.0
 # automationCustomFMobile6ANDROID.sh "velha" "alias" "nomeDaKeystore" "senha1" "senha2" "bundleAndroid" "bundleIOS"
+# automationCustomFMobile6ANDROID.sh "velha" "invictuscontrol" "invictuscontrol" "invictuscontrol5977" "invictuscontrol5977" "br.com.invictuscontrol" "br.com.invictuscontrol"
+# automationCustomFMobile6ANDROID.sh "velha" "lacerdarastreamento" "lacerdarastreamento" "lacerdarastreamento10478" "lacerdarastreamento10478" "br.com.lacerdarastreamento" "br.com.lacerdarastreamento"
 
 print_red() {
   printf "\e[0;31m$1\e[0m"
@@ -59,7 +61,7 @@ enteringTheDatas() {
   pathScripts=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript
   keystorePath=~/Documents/Products_Customs/Keystores/
   pathToRoot=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/ #Path de onde está o script.ssh e o bundletool
-  pathProject=~/Documents/Fulltrack/FMobile6_Android/                                               #$(pwd)
+  pathProject=~/Documents/Fulltrack/FMobile6_Android/                                        #$(pwd)
   PATH_APKSIGNER=~/Library/Android/sdk/build-tools/29.0.3/apksigner
 
   BUILD_APK_UNSIGNED=app-release-unsigned
@@ -98,7 +100,7 @@ enteringTheDatas() {
       sleep 10
     else
 
-      for i in $(echo "$nome" | awk '{print tolower()}' | awk '{ gsub(/ó/,"o"); print }' ); do
+      for i in $(echo "$nome" | awk '{print tolower()}' | awk '{ gsub(/ó/,"o"); print }'); do
         alias+=$i
       done
 
@@ -137,6 +139,12 @@ enteringTheDatas() {
     rm $pathToRoot/info.txt
     rm $pathToRoot/info_"$projeto".html
 
+    APP_NAME_STORE=$(echo "$nome" | awk '{ gsub(/ /,"-"); print }')
+    print_red "Você sabe o APP_STORE_CONNECT_APPLE_ID do Aplicativo?\n"
+    print_green "Se o app for novo, crie o app na App Store depois irá acha-lo em: Estará em: App Store Connect > Apps > App > Info > ID Apple\n"
+    read APP_STORE_CONNECT_APPLE_ID
+    # APP_STORE_CONNECT_APPLE_ID="1523701269" # App Store Connect > Apps > App > Info > ID Apple
+
     printf "
 >>> Data de Criação: $data às $hora <<<
 
@@ -161,7 +169,7 @@ Senha conta IOS: $senhaIOS
 ------------------------ DESENVOLVIMENTO ------------------------ 
 
 Loja Android: https://play.google.com/store/apps/details?id=$bundle
-Loja IOS: https://apps.apple.com/us/app/$appName/id$idIOS#?platform=iphone
+Loja IOS: https://apps.apple.com/br/app/$APP_NAME_STORE/id$APP_STORE_CONNECT_APPLE_ID#?platform=iphone
 
 Contato Teste: $contatoTeste
 
@@ -252,7 +260,7 @@ VersionCode: $versionCode na data $data
 						<h4 class='list-group-item-heading'>Android</h4>
 						<p class='list-group-item-text'>Google Play</p>
 					</a>
-					<a href='https://apps.apple.com/br/app/$appName/$idAppName' target='_blank' class='list-group-item'>
+					<a href='https://apps.apple.com/us/app/$APP_NAME_STORE/id$APP_STORE_CONNECT_APPLE_ID#?platform=iphone' target='_blank' class='list-group-item'>
 						<h4 class='list-group-item-heading'>IOS</h4>
 						<p class='list-group-item-text'>iTunes</p>
 					</a>
@@ -387,7 +395,7 @@ branch=$(echo "custom $nomeDoApp" | awk '{ gsub(/ /,""); print }')
 echo -e "\n\nChamando gitCheck.sh com a branch: $(print_light_red "$branch")"
 sleep 3
 
-sh $pathScripts/Utils/gitCheck.sh $newProjectOrUpdate $pathProject $bundle $branch
+sh $pathScripts/Utils/gitCheck.sh $newProjectOrUpdate $pathProject $bundle $branch 'Android'
 
 # SE O PROJETO FOR DO 0, OU SEJA, NOVO, CHAMA-SE OS SCRIPTS EM PYTHON PARA PEGAR NO CASO AS IMAGENS E OS .JSON
 if [[ $newProjectOrUpdate == 'novo' || $newProjectOrUpdate == 'n' || $newProjectOrUpdate == 'N' ]]; then
@@ -485,7 +493,7 @@ sh $pathScripts/Automacao\ Android/buildInstallMovingAPKAAB.sh $pathProject $nom
 takingPrints() {
   if [[ $newProjectOrUpdate == 'novo' || $newProjectOrUpdate == 'n' ]]; then
     print_light_red "\n\n\n------------------------      Tirando Prints ...      ------------------------"
-    sh $pathScripts/Automacao\ Android/takePrintsFromAndroid.sh $indice '6' $device
+    sh $pathScripts/Automacao\ Android/takePrintsFromAndroid.sh $indice '6' $device $contatoTeste
   else
     afplay /System/Library/Sounds/Blow.aiff
     osascript -e 'display alert "ATENÇÃO!" message "Responda no terminal se quer tirar novos prints ..."'
@@ -495,7 +503,7 @@ takingPrints() {
 
     if [[ $takePrintsFromAndroid == 'y' ]]; then
       print_light_red "\n\n\n--------------------      Tirando Prints NOVAMENTE ...      --------------------"
-      sh $pathScripts/Automacao\ Android/takePrintsFromAndroid.sh $indice '6' $device
+      sh $pathScripts/Automacao\ Android/takePrintsFromAndroid.sh $indice '6' $device $contatoTeste
     fi
   fi
 }

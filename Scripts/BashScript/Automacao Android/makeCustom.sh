@@ -52,6 +52,23 @@ changeAppName() {
 	mv strings_2.xml strings.xml
 }
 
+updateDimensionLogo() {
+	print_red "\n\n_______ Dimension Logo "
+	# layout_width="android:layout_width="194dp""
+	# layout_height="android:layout_height="83dp""
+	cd $pathProject/app/src/main/res/layout/
+
+	awk -F '[<>]' '//{print}' activity_verify_number.xml | awk '{sub(/91/,184); print}' >>activity_verify_number_2.xml
+	rm activity_verify_number.xml
+	mv activity_verify_number_2.xml activity_verify_number.xml
+
+	slepp 5
+
+	awk -F '[<>]' '//{print}' activity_verify_number.xml | awk '{sub(/53/,104); print}' >>activity_verify_number_2.xml
+	rm activity_verify_number.xml
+	mv activity_verify_number_2.xml activity_verify_number.xml
+}
+
 structuringFoldersAndReplaceAllOccurrencesFromBundle() {
 	print_red "\n\n_______ Structuring folders according to the BUNDLE and Replace all occurrences of bundle..."
 
@@ -100,7 +117,7 @@ verifyKeystoreAndMakeIt() {
 		print_blue "\n\nKeystore already exists!!! \nKeystore: $keystore"
 	else
 		print_light_red "\n\nKeystore doesn't exixst, generate one..."
-		sh $pathScripts/generatorKeystore.sh $nomeDaKeystore $alias $passwordDaKeystore1
+		sh $pathScripts/Utils/generatorKeystore.sh $nomeDaKeystore $alias $passwordDaKeystore1
 		print_green "\n\nKeystore generated!!! \nIn: $(pwd) -> $keystore \n\nWe have: \n$(ls)"
 	fi
 
@@ -129,7 +146,12 @@ updateImages() {
 	print_light_blue "\n\n-> Moving images..."
 	cp ~/Downloads/splash.png ~/Downloads/ic_logo_autenticacao.png
 	cp ~/Downloads/ic_logo_autenticacao.png $pathImagens
+
+	cp ~/Downloads/splash.png ~/Downloads/ic_push_notification_default.png
+	cp ~/Downloads/ic_push_notification_default.png $pathImagens
+
 	cp ~/Downloads/iconApp.png $pathImagens
+	cp ~/Downloads/iconApp.svg $pathImagens
 	cp ~/Downloads/iconStore.png $pathImagens
 	cp ~/Downloads/banner.png $pathImagens
 	cp -R ~/Downloads/res/ $pathImagens/
@@ -164,6 +186,7 @@ replaceAllOccurenceBundleAndRemoveIDEAandGRADLE() {
 	print_red "\n\n_______ REPLACING ALL BUNDLE OCCURRENCES... \n_______ And removing the workspace.xml\n\n"
 
 	$(find . \( ! -regex '.*/\..*' \) -type f | xargs perl -pi -e "s/com.fulltrack.fmobile/$bundle/g;") # SUBSTITUINDO TODAS AS OCORRENCIAS DO BUNDLE ...
+	# $(find . \( ! -regex '.*/\..*' \) -type f | xargs perl -pi -e "s/com.fulltrack.fmobile/br.com.velox.mobile/g;")
 
 	rm -rf .idea
 	rm -rf .gradle
@@ -179,6 +202,9 @@ uploadFileGoogleService() {
 openAndroidStudio() {
 	print_light_red "\n\n_______ Opening the ANDROID STUDIO..."
 	open -a Android\ Studio $pathProject
+	
+	# ./gradlew check
+
 	sleep 20
 	afplay /System/Library/Sounds/Blow.aiff
 	print_light_gray "\nAlready synchronized the project??? \nIf YES, then take a return to continue..."
@@ -188,6 +214,8 @@ openAndroidStudio() {
 makeCustom() {
 
 	changeAppName
+
+	updateDimensionLogo
 
 	structuringFoldersAndReplaceAllOccurrencesFromBundle
 

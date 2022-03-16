@@ -48,13 +48,19 @@ checkingStatus() {
 
       afplay /System/Library/Sounds/Blow.aiff
       print_light_red "Resolva os conflitos ...\n"
+      print_light_gray "Only Conflicts: \n\n"
+      print_red "$(git status | grep both | grep modified)"
+
       echo "\nResolveu? ... (y/n)"
       read resolveu
       echo "\n"
 
       if [[ $resolveu == 'y' ]]; then
+        # removingAllReferencesFromCache
+
         print_light_green "\n\nContinuando o rebase 'git rebase --continue' ...\n"
         git add .
+        sleep 3
         git rebase --continue
         # if [[ $(git status | grep "*.DS_Store" | grep ".project" | grep "app/.project") != '' ]]; then
         #   print_light_red "DS_Store - Cache ..."
@@ -145,11 +151,16 @@ else
     print_blue "\nGetting a REBASE on master\n"
     git rebase master
     checkingStatus 'rebase'
-    git status
+    # git status
+    print_light_gray "Only Conflicts: \n\n"
+    print_red "$(git status | grep both | grep modified)"
     sleep 5
 
     print_light_red "\n\nABRINDO O ANDROID STUDIO..."
     open -a Android\ Studio $pathProject
+
+    # ./gradlew check
+
     sleep 20
     afplay /System/Library/Sounds/Blow.aiff
     print_light_gray "\nJá sincronizou o projeto??? \nSe SIM de um 'return' pra continuar ..."

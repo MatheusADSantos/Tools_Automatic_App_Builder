@@ -1,0 +1,11 @@
+git_url("https://github.com/MatheusADSantos/Certificates_Match")
+
+storage_mode("git")
+
+git_branch("INDICE_APP_NAME")
+
+app_identifier("BUNDLE")
+
+username("LOGIN_EMAIL")
+
+# type("development") # The default type, can be: appstore, adhoc, enterprise or development

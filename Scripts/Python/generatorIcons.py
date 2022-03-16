@@ -1,15 +1,21 @@
-#!/Users/macbook-estagio/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/environmentAutomation/bin/python
+#!~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/venvAutomation/bin/python
+# -*- coding: utf-8 -*- 
+# coding: utf-8
 
+import sys
+import os
 import time
 import pyttsx3
 import pyautogui as pa
-import sys
-import os
 import zipfile
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+
+# https://stackoverflow.com/questions/69875125/find-element-by-commands-are-deprecated-in-selenium
+from selenium.webdriver.common.by import By
+
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.select import Select
+# from selenium.webdriver.support.select import Select
 from pynput.mouse import Button, Controller
 mouse = Controller()
 
@@ -23,17 +29,17 @@ def sleep(segundos):
 
 def click_download():
   # sleep(2)
-  element_button_download = browser.find_element_by_xpath('//*[@id="download-zip-button"]')
+  element_button_download = browser.find_element(By.XPATH, '//*[@id="download-zip-button"]')
   element_button_download.click()
   sleep(4)
 
 def config_icons(nome_icon, option_value):
-  element_input_text = browser.find_element_by_xpath('//*[@id="inputs-form"]/div[7]/div/input')
+  element_input_text = browser.find_element(By.XPATH, '//*[@id="inputs-form"]/div[7]/div/input')
   element_input_text.clear()
   element_input_text.send_keys(nome_icon)
   element_input_text.send_keys(Keys.ENTER)
 
-  element_button_shape = browser.find_element_by_xpath('/html/body/div/div[1]/div/div[5]/div/div/select')
+  element_button_shape = browser.find_element(By.XPATH, '/html/body/div/div[1]/div/div[5]/div/div/select')
   element_button_shape.send_keys(option_value)
   print("Form element_button_shape(Value) -----> ", element_button_shape.get_attribute('value'))
   sleep(5)
@@ -62,7 +68,8 @@ def unzip_icons():
 
 
 engine = pyttsx3.init()
-engine.say("Script Automático pra gerar icones começou ...")
+
+engine.say("Iniciando Gerador de icônis")
 engine.runAndWait()
 
 # icon = Image.open('/Users/macbook-estagio/Downloads/icon.png')
@@ -74,30 +81,67 @@ option = Options()
 option.headless = False
 # option.headless = True
 browser = webdriver.Chrome(options=option)
+browser.maximize_window()
+
+
+# GERANDO OS ic_push_notification_default
+url_notification="https://convertio.co/pt/png-svg/"
+browser.get(url_notification)
+sleep(15)
+
+button_select_image = browser.find_element(By.XPATH, "/html/body/div[1]/div/div/div/div[3]/div/div[2]/div[1]/div[1]/label")
+button_select_image.click()
+engine.say("Selecione o icone PNG de push")
+engine.runAndWait()
+sleep(13)
+
+button_convert = browser.find_element(By.XPATH, "/html/body/div[1]/div/div/div/div[3]/div[2]/div/div[2]/div[2]/div/div[2]/div[2]/button").click()
+sleep(18)
+
+button_download = browser.find_element(By.XPATH, "/html/body/div[1]/div/div/div/div[2]/div[2]/div/div[1]/table/tbody/tr/td[6]/a").click()
+sleep(15)
+
+engine.say("Converteu, Gerando icone de push notification...")
+engine.runAndWait()
+
+url_generator_icon_notification="https://romannurik.github.io/AndroidAssetStudio/icons-generic.html#source.type=image&source.space.trim=1&source.space.pad=0&size=96&padding=4&color=rgba(0%2C%200%2C%200%2C%200)&name=ic_push_notification_default"
+browser.get(url_generator_icon_notification)
+sleep(5)
+
+button_select_image_svg = browser.find_element(By.XPATH, '//*[@id="_frm-iconform-source"]/label[1]').click()
+engine.say("Selecione o icone SVG gerado de push ")
+engine.runAndWait()
+sleep(12)
+click_download()
+
+
+
+
+
 # url="https://romannurik.github.io/AndroidAssetStudio/icons-launcher.html#foreground.type=image&foreground.space.trim=1&foreground.space.pad=0&foreColor=rgba(96%2C%20125%2C%20139%2C%200)&backColor=rgb(255%2C%20255%2C%20255)&crop=0&backgroundShape=square&effects=none&name=ic_launcher"
 url="https://romannurik.github.io/AndroidAssetStudio/index.html"
 browser.get(url)
 
 # Selecionando a página 'Laucher Icon Generator'
-browser.find_element_by_xpath('/html/body/div[2]/div/a[1]').click()
+browser.find_element(By.XPATH, '/html/body/div[2]/div/a[1]').click()
 
 # Subindo icon.png 
-element_upload_image = browser.find_element_by_xpath('/html/body/div/div[1]/div/div[1]/div/div[1]/input[4]')
+element_upload_image = browser.find_element(By.XPATH, '/html/body/div/div[1]/div/div[1]/div/div[1]/input[4]')
 element_upload_image.send_keys('/Users/macbook-estagio/Downloads/iconApp.png')
 
 # Zerando o Padding
-element_padding = browser.find_element_by_xpath('/html/body/div/div[1]/div/div[1]/div/div[4]/div[2]/div/div/input')
+element_padding = browser.find_element(By.XPATH, '/html/body/div/div[1]/div/div[1]/div/div[4]/div[2]/div/div/input')
 element_padding.send_keys(Keys.LEFT * 5)
 
 # Mudando o Background Color
-element_background_color = browser.find_element_by_xpath('//*[@id="_frm-iconform-backColor"]/button/div') 
+element_background_color = browser.find_element(By.XPATH, '//*[@id="_frm-iconform-backColor"]/button/div') 
 print(element_background_color.get_attribute('style'))
 # browser.execute_script(" document.getElementsByClassName('form-field-color-widget-swatch')[0].style.cssText = 'color: rgb(255, 255, 255);' ")
 browser.execute_script(" document.getElementsByClassName('form-field-color-widget-swatch')[1].style.cssText = 'color: rgb(255, 255, 255);' ")
 # browser.execute_script(" document.getElementsByClassName('flexbox-fix')[2].style = 'margin: 0px -10px; padding: 10px 0px 0px 10px; border-top: 1px solid rgb(255, 255, 255); display: flex; flex-wrap: wrap; position: relative;' ")
-browser.find_element_by_xpath('//*[@id="_frm-iconform-backColor"]/button').click()
-browser.find_element_by_xpath('/html/body/div/div[1]/div/div[3]/div/div/div/div/div[2]/div[4]/div[19]').click()
-browser.find_element_by_xpath('//*[@id="_frm-iconform-backColor"]/button').send_keys(Keys.ESCAPE)
+browser.find_element(By.XPATH, '//*[@id="_frm-iconform-backColor"]/button').click()
+browser.find_element(By.XPATH, '/html/body/div/div[1]/div/div[3]/div/div/div/div/div[2]/div[4]/div[19]').click()
+browser.find_element(By.XPATH, '//*[@id="_frm-iconform-backColor"]/button').send_keys(Keys.ESCAPE)
 print(element_background_color.get_attribute('style'))
 sleep(5)
 
@@ -114,24 +158,7 @@ config_icons('ic_launcher_foreground', 'square')
 config_icons('ic_launcher_round', 'circle')
 
 
-# GERANDO OS drawble(Icones do Push Notification)
-url_notification="https://romannurik.github.io/AndroidAssetStudio/icons-notification#source.type=image&source.space.trim=0&source.space.pad=0&name=ic_push_notification_default"
-browser.get(url_notification)
-sleep(5)
 
-# Selecionando o Source Text
-element_button_text = browser.find_element_by_xpath('//*[@id="_frm-iconform-source"]/label[3]')
-element_button_text.click()
-sleep(5)
-
-# Digitando o nome do icone
-element_input_text = browser.find_element_by_xpath('//*[@id="inputs-form"]/div[1]/div/div[3]/div[1]/div/input')
-element_input_text.clear()
-text_push_notification = sys.argv[1]
-element_input_text.send_keys(text_push_notification)
-element_input_text.send_keys(Keys.ENTER)
-sleep(3)
-click_download()
 
 engine.say("Gerou os icones ...!")
 engine.runAndWait()
@@ -145,6 +172,7 @@ engine.runAndWait()
 unzip_icons()
 sleep(2)
 
-engine.say("PRONTOO!")
+engine.say("PRONTO!")
 engine.runAndWait()
+
 os.system('deactivate')

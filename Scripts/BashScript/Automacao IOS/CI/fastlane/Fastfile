@@ -1,0 +1,269 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+before_all do
+    update_fastlane
+    sh("bundle update")
+    # ENV["FASTLANE_DONT_STORE_PASSWORD"] = "1"
+    ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"]
+    ENV["FASTLANE_USER"]
+    ENV["FASTLANE_PASSWORD"]
+
+    UI.message "--- Enviroments ---"
+    UI.message ENV["FASTLANE_USER"]
+    UI.message ENV["FASTLANE_PASSWORD"]
+    UI.message ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"]
+
+    sh("afplay /System/Library/Sounds/Hero.aiff")
+    notification(subtitle: "Starting", message: "Starting Process Fastlane => Before All")
+    sh("source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/venvAutomation/bin/activate && python ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/alertsFastlaneIOS.py before_all && sleep 5")
+end
+
+platform :ios do
+  desc "Description of what the lane does"
+
+  lane :releaseFirebaseBeta do
+  clean_build_artifacts
+
+  gym(workspace: "FMobile.xcworkspace",
+        scheme: "FMobile",
+        configuration: 'Release',
+        export_method: 'ad-hoc',
+        export_options: {
+          compileBitcode: false,  # let's disable it. Xcode 9.0 is buggy.
+          uploadSymbols: false    # symbol extraction in Xcode 9.0 does not work.
+        },
+        include_symbols: true) # Build your app - more options available
+
+  firebase_app_distribution(
+    app: "1:700850434617:ios:2bf32c93c45f837a0c13e8",
+    release_notes: "This release is specifically for new features and bug fixes"
+  )
+  end
+
+
+  lane :release do
+    gym(scheme: "FMobile", configuration: 'Release')
+    deliver(force: true)
+  end
+
+  #-----------------------------------------------------------------------------------------
+
+  lane :getTeamNames do
+    UI.message "Matheus"
+    UI.message ENV["FASTLANE_PASSWORD"]
+    UI.message ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"]
+    UI.message ENV["FASTLANE_USER"]
+    UI.message ENV["FASTLANE_PASSWORD"]
+    
+    require "spaceship" 
+    ENV["SPACESHIP_2FA_SMS_DEFAULT_PHONE_NUMBER"]
+    clientTunes = Spaceship::Tunes.login(ENV["APPLE_ID"], ENV["FASTLANE_PASSWORD"])
+    client = Spaceship::Portal.login(ENV["APPLE_ID"] ,ENV["FASTLANE_PASSWORD"])
+  
+    UI.message "\n\n\n* Developer Portal Team ID:"
+    strDevPortal = "" 
+    a=0
+    client.teams.each do |team|
+        a+=1
+        UI.message "#{a}) #{team['name']}   ||   TEAM_ID: #{team['teamId']}"
+        strDevPortal << "#{team['name']} (#{team['teamId']})||"
+    end
+
+    UI.message "\n\n\n* App Store Connect Team ID:"
+    strClientTunes = "" 
+    a=0
+    clientTunes.teams.each do |team|
+        a+=1
+        UI.message "#{a}) #{team['contentProvider']['name']}   ||   ITC_TEAM_ID: #{team['contentProvider']['contentProviderId']}"
+        strClientTunes << "#{team['contentProvider']['name']} (#{team['contentProvider']['contentProviderId']})||"
+    end
+end
+
+desc "Delete all certificates" # https://docs.fastlane.tools/actions/match_nuke/
+lane :delete_keys do
+    match_nuke(type: "development") # fastlane match nuke development
+    match_nuke(type: "distribution") # fastlane match nuke distribution
+end
+
+desc "Create Keys" # https://docs.fastlane.tools/actions/match/
+lane :create_keys do
+    reg_dev
+    match(type: "development", force_for_new_devices: true)
+    match(type: "adhoc", force_for_new_devices: true)
+    match(type: "appstore")
+end
+
+desc "Download keys" # https://docs.fastlane.tools/actions/match/
+lane :download_keys do
+    match(type: "development", readonly: true)
+    match(type: "adhoc", readonly: true)
+    match(type: "appstore", readonly: true)
+end
+
+desc "Register Devices..." # http://docs.fastlane.tools/actions/register_devices/#register_devices
+lane :reg_dev do
+    register_devices(
+        devices: {
+            "Matheus Santos - iPhone X" => "2503ee3b0743312638e3f30cffde24dbb192fa79",
+            "Matheus Santos - iPhone 5" => "929ce290926f548e1d806c717385334a5dbc74ef",
+            "Luis Sena - iPhone X" => "e704edbc7d73a3954857be152be791a0503d8c2f",
+            "Guilherme Diniz - iPhone 7 Plus" => "31b6a77d84f3b2d9834ff0d84f5e8d7e3be167fc",
+            "Breno Carvalho - iPhone 7" => "01c4eeb6d96874c952ec6068e6ec218491b733f4",
+            "Breno Carvalho - iPhone XR" => "00008020-000469901411802E"
+        },
+        team_id: "Testers Fulltime"
+      )
+end
+
+desc "Build Ad Hoc"
+lane :buildAdHoc do
+
+    match(type: "adhoc", readonly: true)
+
+    cocoapods
+
+    build_app(
+        workspace: ENV["XCODE_WORKSPACE"],
+        scheme: ENV["XCODE_SCHEME"],
+        configuration: ENV["XCODE_CONFIGURATION"],
+        export_options: {
+            method: "ad-hoc",
+            provisioningProfiles: {
+                ENV["APP_IDENTIFIER"] => ENV["PROFILE_AD_HOC"]
+            }
+        }
+    )
+end
+
+desc "Build"
+lane :build do
+
+    sh("afplay /System/Library/Sounds/Hero.aiff")
+    notification(subtitle: "Startted Build", message: "Buildding...")
+    sh("source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/venvAutomation/bin/activate && python ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/alertsFastlaneIOS.py build && sleep 5")
+
+    # Configurations gym
+    ### match(type: "appstore", readonly: is_ci, force_for_new_devices: true)
+    ### match(type: "appstore/development/adhoc", readonly: true) # readonly: true => Just to not create a new provise profile, Only download an existent
+    ### configuration: 'Release/Debug/AddHoc',
+    ### export_method: 'app-store/development/ad-hoc' # Method used to export the archive. Valid values are: app-store, validation, ad-hoc, package, enterprise, development, developer-id and mac-application
+
+    ENV["FASTLANE_XCODE_LIST_TIMEOUT"] = "360" 
+    ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "60"
+    ENV["FASTLANE_XCODEBUILD_SETTINGS_RETRIES"] = "60"
+
+    cocoapods
+
+    reg_dev
+
+    clean_build_artifacts
+
+    set_info_plist_value(path: "./FMobile/Resources/Info.plist", key: "ITSAppUsesNonExemptEncryption", value: false)
+
+    match(type: "appstore", readonly: true)
+
+    get_push_certificate()
+
+
+    gym( # https://docs.fastlane.tools/actions/gym/
+        workspace: ENV["WORKSPACE"],
+        scheme: ENV["SCHEME"],
+        clean: true,
+        silent: true, # Hide all information that's not necessary while building
+        
+        export_options: { # 'xcodebuild -help' to print the full set of available options
+          compileBitcode: false,
+          uploadSymbols: false 
+        },
+        include_symbols: true
+    )
+end
+
+desc "Deploy to Firebase Distribution"
+lane :firebase do
+
+    buildAdHoc
+
+    bundle exec fastlane add_plugin firebase_app_distribution
+
+    firebase_app_distribution( # https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane
+        app: ENV["FIREBASE_APP_ID"],
+        testers: ENV["FIREBASE_TESTERS"],
+        groups: ENV["FIREBASE_TEST_GROUP"],
+        ipa_path: lane_context[SharedValues::IPA_OUTPUT_PATH],
+        release_notes_file: "fastlane/release_notes.txt",
+        service_credentials_file: ENV["FIREBASE_DIST_SERVICE_ACCOUNT_FILE"]
+    )
+
+    # firebase_app_distribution(
+    #     app: "1:615191210205:ios:1b0016505ed51087d01334",
+    #     release_notes: "This release is specifically for new features and bug fixes"
+    #   )
+end
+
+desc "Upload to Test Flight"
+lane :tf do
+
+    inc
+    
+    build
+
+    upload_to_testflight( # https://docs.fastlane.tools/actions/upload_to_testflight
+        skip_waiting_for_build_processing: true,
+        apple_id: ENV["APP_STORE_CONNECT_APPLE_ID"]
+    )
+end
+
+desc "Upload to Test Flight - External"
+lane :tf_external do
+
+    inc
+
+    build
+
+    upload_to_testflight( # https://docs.fastlane.tools/actions/upload_to_testflight
+        beta_app_feedback_email: ENV["EMAIL"],
+        beta_app_description: ENV["DESCRIPTION_5622"],
+        changelog: ENV["CHANGELOG"],
+
+        notify_external_testers: true,
+        skip_waiting_for_build_processing: true,
+
+        distribute_external: true,
+        groups: ["Testers Fulltime"]
+    )
+
+    sh("afplay /System/Library/Sounds/Hero.aiff")
+    notification(subtitle: "Finished Building", message: "Uploading to TestFlight...")
+    sh("source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/venvAutomation/bin/activate && python ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/Python/alertsFastlaneIOS.py upload_to_testflight && sleep 5")
+end
+
+desc "Increment Build Number"
+lane :inc do
+    puts latest_testflight_build_number
+    build_number = increment_build_number
+end
+
+lane :screenshots do
+    capture_screenshots
+    # frame_screenshots(white: true)
+    # upload_to_app_store
+end
+
+
+end
