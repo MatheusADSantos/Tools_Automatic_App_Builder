@@ -28,7 +28,7 @@
 # 	if [[branchNova == y ]]; then
 # 		afplay /System/Library/Sounds/Blow.aiff
 # 		osascript -e 'display alert "ATENÇÃO!" message "Verifique se está conectado na VPN"'
-# 		git checkout master
+# 		git checkout main
 # 		git pull
 # 		sleep 2
 
@@ -38,7 +38,7 @@
 # 	else
 # 		afplay /System/Library/Sounds/Blow.aiff
 # 		osascript -e 'display alert "ATENÇÃO!" message "Verifique se está conectado na VPN"'
-# 		git checkout master
+# 		git checkout main
 # 		git pull
 # 		sleep 2
 

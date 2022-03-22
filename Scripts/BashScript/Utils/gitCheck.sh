@@ -95,7 +95,7 @@ checkingStatus
 if [[ $newProjectOrUpdate == 'novo' || $newProjectOrUpdate == 'n' || $newProjectOrUpdate == 'N' ]]; then
   afplay /System/Library/Sounds/Blow.aiff
   osascript -e 'display alert "ATENÇÃO!" message "Verifique se está conectado na VPN"'
-  git checkout master
+  git checkout main
   git pull
   sleep 2
 
@@ -132,7 +132,7 @@ else
     afplay /System/Library/Sounds/Blow.aiff
     osascript -e 'display alert "ATENÇÃO!" message "Verifique se está conectado na VPN"'
 
-    git checkout master
+    git checkout main
     git pull
     git status
     sleep 5
@@ -148,8 +148,8 @@ else
     print_green "$(git branch)"
     sleep 3
 
-    print_blue "\nGetting a REBASE on master\n"
-    git rebase master
+    print_blue "\nGetting a REBASE on main\n"
+    git rebase main
     checkingStatus 'rebase'
     # git status
     print_light_gray "Only Conflicts: \n\n"
