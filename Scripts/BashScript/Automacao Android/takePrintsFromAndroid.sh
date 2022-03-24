@@ -214,7 +214,7 @@ gettingPrintsFromFmobile6() {
   adb -s $device shell input keyevent 66
 
   # Tela grip principal com os rastreados
-  sleep 7
+  sleep 9
   adb -s $device shell screencap $pathToScreenshots/GridPrincipal_"$bundle".png
 
   # Tela MAPA
@@ -224,7 +224,7 @@ gettingPrintsFromFmobile6() {
 
   # Tela Notificação
   adb -s $device shell input tap 600 2250
-  sleep 7
+  sleep 9
   adb -s $device shell screencap $pathToScreenshots/Notificacoes_"$bundle".png
 
   # Tela MAIS
@@ -234,68 +234,70 @@ gettingPrintsFromFmobile6() {
 
   # Tela Detalhes do Rastreado
   adb -s $device shell input tap 150 2250 # Indo pra lista de rastreados
-  sleep 5
+  sleep 8
   adb -s $device shell input tap 800 400
   sleep 4
   adb -s $device shell screencap $pathToScreenshots/DetalhesDoRastreado_"$bundle".png
 
   # Tela Rastreado no mapa
-  adb -s $device shell input tap 540 1100
+  sleep 2
+  adb -s $device shell input tap 540 1150 # Or 1100
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/RastreadoNoMapa_"$bundle".png
 
   # Tela Cerca Rápida
   adb -s $device shell input keyevent 4 #back
-  adb -s $device shell input tap 540 1300
+  sleep 4
+  adb -s $device shell input tap 540 1350 # Or 1300
   sleep 6
   adb -s $device shell screencap $pathToScreenshots/CercaRapida_"$bundle".png
 
   # Tela Histórico de Posições
   adb -s $device shell input keyevent 4 #back
   sleep 4
-  adb -s $device shell input tap 540 1450
+  adb -s $device shell input tap 540 1500 # Or 1450
   sleep 7
   adb -s $device shell screencap $pathToScreenshots/HistoricoDePosicoes_"$bundle".png
 
   # Tela Permanencia em Ponto
   adb -s $device shell input keyevent 4 #back
   sleep 4
-  adb -s $device shell input tap 540 1550
+  adb -s $device shell input tap 540 1600 # Or 1550
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/PermanenciaEmPonto_"$bundle".png
 
   # Tela Dados Consolidados
   adb -s $device shell input keyevent 4 #back
   sleep 4
-  adb -s $device shell input tap 540 1650
+  adb -s $device shell input tap 540 1700 # Or 1650
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/DadosConsolidados_"$bundle".png
 
   # Tela Criar Ponto de Referência
   adb -s $device shell input keyevent 4 #back
   sleep 4
-  adb -s $device shell input tap 540 1800
+  adb -s $device shell input tap 540 1850 # Or 1800
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/CriarPontoDeReferencia_"$bundle".png
 
   # Tela Consumo de Combustível
   adb -s $device shell input keyevent 4 #back
   sleep 4
-  adb -s $device shell input tap 540 1900
+  adb -s $device shell input tap 540 1950 # Or 1900
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/ConsumoDeCombustivel_"$bundle".png
 
   # Tela de Sensores
   adb -s $device shell input keyevent 4 #back
   sleep 4
-  adb -s $device shell input tap 540 2000
+  adb -s $device shell input tap 540 2050 # Or 2000
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/Sensores_"$bundle".png
 
   # Tela de Manutenções Programadas
   adb -s $device shell input keyevent 4 #back
   sleep 4
-  adb -s $device shell input tap 540 2200
+  adb -s $device shell input tap 540 2250 # Or 2200
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/ManutencoesProgramadas_"$bundle".png
 
@@ -304,7 +306,7 @@ gettingPrintsFromFmobile6() {
   sleep 4
   adb -s $device shell input swipe 100 1450 100 500 100
   sleep 3
-  adb -s $device shell input tap 540 2200
+  adb -s $device shell input tap 540 2250 # Or 2200 
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/BloquearVeiculos_"$bundle".png
 
