@@ -214,17 +214,29 @@ gettingPrintsFromFmobile6() {
   adb -s $device shell input keyevent 66
 
   # Tela grip principal com os rastreados
-  sleep 9
+  sleep 10
   adb -s $device shell screencap $pathToScreenshots/GridPrincipal_"$bundle".png
 
   # Tela MAPA
   adb -s $device shell input tap 300 2250
-  sleep 9
+  sleep 10
+
+  # adb -s $device shell input keyevent 169
+  # adb -s $device shell input keyevent KEYCODE_ZOOM_OUT
+
+  adb -s $device shell input tap 1000 1800
+  adb -s $device shell input tap 540 900
+  sleep 2
   adb -s $device shell screencap $pathToScreenshots/Mapa_"$bundle".png
+
+  # Voltando ao mapa normal ...
+  adb -s $device shell input tap 1000 1800
+  adb -s $device shell input tap 540 800
+  sleep 2
 
   # Tela Notificação
   adb -s $device shell input tap 600 2250
-  sleep 9
+  sleep 10
   adb -s $device shell screencap $pathToScreenshots/Notificacoes_"$bundle".png
 
   # Tela MAIS
@@ -306,7 +318,7 @@ gettingPrintsFromFmobile6() {
   sleep 4
   adb -s $device shell input swipe 100 1450 100 500 100
   sleep 3
-  adb -s $device shell input tap 540 2250 # Or 2200 
+  adb -s $device shell input tap 540 2250 # Or 2200
   sleep 5
   adb -s $device shell screencap $pathToScreenshots/BloquearVeiculos_"$bundle".png
 
