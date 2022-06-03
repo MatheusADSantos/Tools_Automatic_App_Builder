@@ -1,100 +1,66 @@
 #!/bin/bash
-echo ''
-echo ''
-echo ''
-echo 'Killing XCODE...'
+
+print_red() {
+	printf "\e[0;31m$1\e[0m"
+}
+
+print_red "\n\nKilling XCODE...\n"
 killall Xcode
 xcrun -k
 
-echo ''
-echo ''
-echo ''
-echo 'Cleanning...'
+print_red "\n\nCleanning...\n"
 xcodebuild -alltargets clean
 # rm -rf "$(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang/ModuleCache"
 # rm -rf "$(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang.$(whoami)/ModuleCache"
 
-
-
-echo ''
-echo ''
-echo ''
-echo 'Tamanho dos DerivedData'
+print_red "\n\nTamanho dos DerivedData\n"
 cd ~/Library/Developer/Xcode/DerivedData/
-sudo du -khd 1
+du -khd 1
 
-echo ''
-echo ''
-echo ''
-echo 'Deletando os DerivedData...'
+print_red "\n\nDeletando os DerivedData...\n"
 rm -rf ~/Library/Developer/Xcode/DerivedData/*
 
-
-
-echo ''
-echo ''
-echo ''
-echo 'Tamanho os ARCHIVES'
+print_red "\n\nTamanho os ARCHIVES\n"
 cd ~/Library/Developer/Xcode/Archives/
-sudo du -khd 1
+du -khd 1
 
-echo ''
-echo ''
-echo ''
-echo 'Deletando os ARCHIVES...'
+print_red "\n\nDeletando os ARCHIVES...\n"
 rm -rf ~/Library/Developer/Xcode/Archives/*
-
 
 # rm -rf ~/Library/Caches/com.apple.dt.Xcode/*
 
-
-echo ''
-echo ''
-echo ''
 # xcrun simctl help
-echo 'Tamanho dos SIMULADORES'
+print_red "\n\nTamanho dos SIMULADORES\n"
 cd ~/Library/Developer/CoreSimulator/Devices
-sudo du -khd 1
+du -khd 1
 
-echo ''
-echo ''
-echo ''
-echo 'LISTA - SIMULADORES'
+print_red "\n\nLISTA - SIMULADORES\n"
 xcrun simctl list
 
-echo ''
-echo ''
-echo ''
-echo 'Deletando os Simuladores inutilizaveis ...'
+print_red "\n\nDeletando os Simuladores inutilizaveis ...\n"
 xcrun simctl delete unavailable
 
-
-
-
-echo ''
-echo ''
-echo ''
-echo '>>> DEPOIS DA LIMPA ... <<<'
-echo 'Tamanho dos DerivedData'
+print_red "\n\n>>> DEPOIS DA LIMPA ... <<< \nTamanho dos DerivedData\n"
 cd ~/Library/Developer/Xcode/DerivedData/
-sudo du -khd 1
-echo 'Tamanho os ARCHIVES'
+du -khd 1
+print_red "\n\nTamanho os ARCHIVES\n"
 cd ~/Library/Developer/Xcode/Archives/
-sudo du -khd 1
-echo 'Tamanho dos SIMULADORES'
+du -khd 1
+print_red "\n\nTamanho dos SIMULADORES\n"
 cd ~/Library/Developer/CoreSimulator/Devices
-sudo du -khd 1
+du -khd 1
 
+if [[ $1 != "" ]]; then
+    reiniciar=$1
+else
+    print_red "\n\nReload XCODE(y/n)???\n"
+    read reiniciar
+fi
 
-echo ''
-echo ''
-echo ''
-echo 'Reload XCODE(y/n)???'
-read reiniciar
 if [[ $reiniciar == "yes" ]] || [[ $reiniciar == "y" ]]; then
-    echo "Reiniciando XCode ..."
+    print_red "\n\nReiniciando XCode ...\n"
     open /Applications/Xcode.app
-    echo 'CONCLUÍDO!!!'
-        else
-            echo 'CONCLUÍDO!!!'
+    print_red "\n\nCONCLUÍDO!!!\n"
+else
+    print_red "\n\nCONCLUÍDO!!!\n"
 fi

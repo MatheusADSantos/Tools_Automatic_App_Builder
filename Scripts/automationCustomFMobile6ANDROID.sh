@@ -8,8 +8,16 @@ source ~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Sc
 
 # Customs do FMobile 5.0
 # automationCustomFMobile6ANDROID.sh "velha" "alias" "nomeDaKeystore" "senha1" "senha2" "bundleAndroid" "bundleIOS"
-# automationCustomFMobile6ANDROID.sh "velha" "invictuscontrol" "invictuscontrol" "invictuscontrol5977" "invictuscontrol5977" "br.com.invictuscontrol" "br.com.invictuscontrol"
-# automationCustomFMobile6ANDROID.sh "velha" "lacerdarastreamento" "lacerdarastreamento" "lacerdarastreamento10478" "lacerdarastreamento10478" "br.com.lacerdarastreamento" "br.com.lacerdarastreamento"
+# automationCustomFMobile6ANDROID.sh "velha" "ors" "orsat" "orsat7981" "orsat7981" "br.com.orsat" ""
+# automationCustomFMobile6ANDROID.sh "velha" "santrack" "santrack" "grwplhge656" "grwplhge656" "br.com.santrack.app" ""
+# automationCustomFMobile6ANDROID.sh "velha" "worldtrackmobile" "worldtrackmobile" "worldtrackmobile8412" "worldtrackmobile8412" "br.com.worldtrack.mobile" "br.com.worldtrack.mob"
+# automationCustomFMobile6ANDROID.sh "velha" "kropcar" "krop" "k12r34o" "k12r34o" "br.com.krop" "br.com.krop"
+# automationCustomFMobile6ANDROID.sh "velha" "rastcast" "rastcast" "rastcast9273" "rastcast9273" "br.com.fulltime.rastcast" "br.com.fulltime.rastcast"
+# automationCustomFMobile6ANDROID.sh "velha" "sigatron" "sigatron" "D1vZ1EaQ" "D1vZ1EaQ" "br.com.fulltime.sigatron" "br.com.fulltime.sigatron"
+# automationCustomFMobile6ANDROID.sh "velha" "eyesattracker" "eyesattracker" "eyesattracker68453" "eyesattracker68453" "br.com.eyesat.tracker" "br.com.eyesat.tracker"
+# automationCustomFMobile6ANDROID.sh "velha" "sigamais" "sigamais" "siga123mais" "siga123mais" "br.com.sigamaisrastreamento" "br.com.sigamaisrastreamento"
+# automationCustomFMobile6ANDROID.sh "velha" "securitytechnology" "securitytechnology" "securitytechnology5258" "securitytechnology5258" "br.com.securitytechnology" "br.com.securitytechnology"
+
 
 print_red() {
   printf "\e[0;31m$1\e[0m"
@@ -402,7 +410,6 @@ if [[ $newProjectOrUpdate == 'novo' || $newProjectOrUpdate == 'n' || $newProject
   # CRIANDO OS ARQUIVOS JSON
   afplay /System/Library/Sounds/Blow.aiff
   osascript -e 'display alert "ATENÇÃO!" message "Gerou os .json?" '
-  # sh $pathScripts/callScriptsPython.sh 'gerar jsons' $email
 
   # CADASTRANDO A CUSTOM
   afplay /System/Library/Sounds/Blow.aiff

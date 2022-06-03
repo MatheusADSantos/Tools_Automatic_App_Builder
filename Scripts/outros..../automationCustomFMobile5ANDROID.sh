@@ -108,7 +108,8 @@ enteringTheDatas() {
   # FMOBILE 5.0
   pathScripts=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/BashScript
   keystorePath=~/Documents/Products_Customs/Keystores/
-  pathToRoot=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls #Path de onde está o script.ssh e o bundletool
+  # pathToRoot=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls #Path de onde está o script.ssh e o bundletool
+  pathToRoot=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts
   pathProject=~/Documents/Fulltrack/FMobileRN/android               #$(pwd)
   PATH_APKSIGNER=~/Library/Android/sdk/build-tools/29.0.3/apksigner
 
@@ -521,14 +522,14 @@ builddingApkAndAAB() {
   print_blue "\n\n-> Rodando ./gradlew clean \nRemove ./build\n\n"
   ./gradlew clean
 
-  print_blue "\n\n-> Rodando ./gradlew cleanBuildCache ... \n\n"
-  ./gradlew cleanBuildCache
+  # print_blue "\n\n-> Rodando ./gradlew cleanBuildCache ... \n\n"
+  # ./gradlew cleanBuildCache
 
   print_blue "\n\n-> Rodando ./gradlew cleanBuild \nRemove ./app/build\n\n"
   ./gradlew cleanBuild
 
-  print_blue "\n\n-> Rodando ./gradlew build"
-  ./gradlew build
+  # print_blue "\n\n-> Rodando ./gradlew build"
+  # ./gradlew build
 
   # ---------------------------------------------------------------------------------------------------------
   # Gera app-release-unsigned.apk em ./app/build/outputs/apk/release/app-release-unsigned.apk
@@ -544,9 +545,9 @@ builddingApkAndAAB() {
   print_blue "\n\n-> Otimizando o .apk com o zipalign\n"
   ./zipalign -v -p 4 ./app-release-unsigned.apk $BUILD.apk
 
-  afplay /System/Library/Sounds/Blow.aiff
-  print_light_red "\n\n\nVERIFIQUE"
-  read verificou
+  # afplay /System/Library/Sounds/Blow.aiff
+  # print_light_red "\n\n\nVERIFIQUE"
+  # read verificou
 
   ./apksigner sign --ks $nomeDaKeystore.keystore --ks-key-alias $alias --ks-pass pass:$passwordDaKeystore1 --key-pass pass:$passwordDaKeystore2 $BUILD.apk
   rm ./app-release-unsigned.apk
@@ -577,7 +578,10 @@ builddingApkAndAAB() {
   cd $pathToRoot
   print_blue "\n\n-> Assinando o .aab ($BUILD_AAB_UNSIGNED.aab) \nApós assinado estára em: $pathToRoot/$BUILD.aab\n\n"
   # java -jar bundletool-all-1.7.0.jar build-apks --bundle=$BUILD_AAB_UNSIGNED.aab --output=$BUILDS.apks --ks=$keystorePath/$nomeDaKeystore.keystore --ks-pass=pass:$passwordDaKeystore1 --ks-key-alias=$alias --key-pass=pass:$passwordDaKeystore2
+  # java -jar bundletool-all-1.7.0.jar build-apks --bundle=$BUILD_AAB_UNSIGNED.aab --output=$BUILDS.apks --ks=$nomeDaKeystore.keystore --ks-pass=pass:$passwordDaKeystore1 --ks-key-alias=$alias --key-pass=pass:$passwordDaKeystore2
+  
   java -jar bundletool-all-1.7.0.jar build-apks --bundle=$BUILD_AAB_UNSIGNED.aab --output=$BUILDS.apks --ks=$nomeDaKeystore.keystore --ks-pass=pass:$passwordDaKeystore1 --ks-key-alias=$alias --key-pass=pass:$passwordDaKeystore2
+  # jarsigner -keystore $keystorePath/$nomeDaKeystore.keystore -storepass $passwordDaKeystore1 -keypass $passwordDaKeystore2 $BUILD.aab $alias
 
   mv ./$BUILD_AAB_UNSIGNED.aab ./$BUILD.aab
 }
@@ -592,7 +596,7 @@ installAppInDevice() {
 
   # print_blue "\n\n-> Instalando o .apk assinado no device: \n$device \n\nEm: $(pwd) Temos: \n$(ls) \n\n\n"
   print_blue "\n\n-> Instalando o .apk assinado no device: \n$device\n\n\n"
-  java -jar bundletool-all-1.7.0.jar install-apks --apks=$BUILDS.apks --device-id=$device
+  java -jar bundletool.jar install-apks --apks=$BUILDS.apks --device-id=$device
   print_light_green "\n\n\n$nome.apk instalado no device: $device\n"
 
   # print_blue "\n\n-> Instalando o .apk assinado no device: \n$device\n\n\n"
@@ -666,7 +670,7 @@ takingPrints() {
     fi
   fi
 }
-takingPrints
+# takingPrints
 
 settingUpFences() {
   print_light_red "\n\n\n---------------      Configurando Cercas pra testar os PUSH ...      ---------------"
@@ -683,7 +687,7 @@ settingUpFences() {
     sh $pathScripts/settingUpForPushTest.sh $indice $contatoTeste
   fi
 }
-settingUpFences
+# settingUpFences
 
 uploadProjectToSeverFileSystem() {
   afplay /System/Library/Sounds/Blow.aiff

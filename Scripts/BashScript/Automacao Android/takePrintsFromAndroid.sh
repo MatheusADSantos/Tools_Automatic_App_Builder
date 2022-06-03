@@ -188,11 +188,13 @@ gettingPrintsFromFmobile6() {
 
   # adb -s $device shell input text "14123456789"
 
-  if [[ $contatoTeste == '' ]]; then
-    adb -s $device shell input text "14123456789"
-  else
-    adb -s $device shell input text $contatoTeste
-  fi
+  # if [[ $contatoTeste == '' ]]; then
+  #   adb -s $device shell input text "14123456789"
+  # else
+  #   adb -s $device shell input text $contatoTeste
+  # fi
+
+  adb -s $device shell input text "14102030405"
 
   adb -s $device shell input keyevent 66
 
@@ -203,13 +205,17 @@ gettingPrintsFromFmobile6() {
 
   # adb -s $device shell input text "54321"
 
-  if [[ $contatoTeste == '' ]]; then
-    adb -s $device shell input text "54321"
-  else
-    print_red "Qual o código? ...."
-    read codigo
-    adb -s $device shell input text $codigo
-  fi
+  # if [[ $contatoTeste == '' ]]; then
+  #   adb -s $device shell input text "54321"
+  # else
+  #   print_red "Qual o código? ...."
+  #   read codigo
+  #   adb -s $device shell input text $codigo
+  # fi
+
+  print_red "Qual o código? ...."
+  read codigo
+  adb -s $device shell input text $codigo
 
   adb -s $device shell input keyevent 66
 
@@ -261,7 +267,7 @@ gettingPrintsFromFmobile6() {
   adb -s $device shell input keyevent 4 #back
   sleep 4
   adb -s $device shell input tap 540 1350 # Or 1300
-  sleep 6
+  sleep 9
   adb -s $device shell screencap $pathToScreenshots/CercaRapida_"$bundle".png
 
   # Tela Histórico de Posições

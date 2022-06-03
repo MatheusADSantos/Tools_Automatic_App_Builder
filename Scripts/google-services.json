@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "94819342141",
-    "project_id": "coruripe-frotas",
-    "storage_bucket": "coruripe-frotas.appspot.com"
+    "project_number": "479657657127",
+    "project_id": "security-technology-7f1f3",
+    "storage_bucket": "security-technology-7f1f3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:94819342141:android:226d265ead0dd477255754",
+        "mobilesdk_app_id": "1:479657657127:android:3273747213c64f60771f02",
         "android_client_info": {
-          "package_name": "br.com.coruripefrotas"
+          "package_name": "br.com.securitytechnology"
         }
       },
       "oauth_client": [
         {
-          "client_id": "94819342141-086prefg9gbubfs4gu9oeuibvpvqe2g3.apps.googleusercontent.com",
+          "client_id": "479657657127-84ig800t0kltj2jtod646ethsr47b2ru.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyALLmIxf_zLEsZNE5dyPH2o5VEPKGZP5rY"
+          "current_key": "AIzaSyD1W0Po2lj8U6EvuTyn6G1IvdGNeL_TaYU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "94819342141-086prefg9gbubfs4gu9oeuibvpvqe2g3.apps.googleusercontent.com",
+              "client_id": "479657657127-84ig800t0kltj2jtod646ethsr47b2ru.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
