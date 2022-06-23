@@ -8,7 +8,7 @@
 # makeCustom() {
 # 	# A IMPLEMENTAR ...
 # 	pathProject5=~/Documents/Fulltrack/FMobileRN/android
-# 	pathProject6=~/Documents/Fulltrack/FMobile6_Android/
+# 	pathProject6=~/Documents/Fulltrack/Gitlab_Projects/FMobile6_Android
 
 # 	cd $pathProject5
 
@@ -105,7 +105,7 @@
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# pathProject=~/Documents/Fulltrack/FMobile6_Android/
+# pathProject=~/Documents/Fulltrack/Gitlab_Projects/FMobile6_Android
 
 # echo "BUNDLE: "
 # read bundle

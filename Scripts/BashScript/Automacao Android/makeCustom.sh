@@ -40,8 +40,8 @@ sleep 10
 
 pathScripts=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript
 pathToRoot=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/
-pathImagens=~/Documents/Products_Customs/Imagens/
-keystorePath=~/Documents/Products_Customs/Keystores/
+pathImagens=~/Documents/tools-automatic-app-customs/Imagens/
+keystorePath=~/Documents/tools-automatic-app-customs/Keystores/
 pathProject=~/Documents/Fulltrack/FMobile6_Android #pode excluir!!!!!!!
 
 changeAppName() {

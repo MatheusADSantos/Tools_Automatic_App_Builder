@@ -30,7 +30,7 @@ sleep 5
 
 getInformation() {
   # pathToRoot=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/
-  # cd ~/Documents/Products_Customs/Projetos
+  # cd ~/Documents/tools-automatic-app-customs/Projetos
   # print_light_red "\n\n\n>>> PROJETOS EXISTENTES <<<\n"
   # print_green "$(ls) \n"
   # touch projetos.txt            #Criando projetos.txt
@@ -40,7 +40,7 @@ getInformation() {
   # rm projetos.txt
 
   pathToRoot=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/
-  pathProjects=~/Documents/Products_Customs/Projetos
+  pathProjects=~/Documents/tools-automatic-app-customs/Projetos
   cd $pathProjects
   touch projetos.txt            #Criando projetos.txt
   printf "$(ls)" >>projetos.txt #Inserindo o conteúdo no projetos.txt
@@ -62,7 +62,7 @@ getInformation() {
     print_green "$projeto\n\n"
     sleep 2
 
-    cd ~/Documents/Products_Customs/Projetos/"$projeto"/
+    cd ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/
     bundle=$(awk '/Bundle Android/{print $0}' info.txt | awk '{sub(/Bundle Android: /,""); print}')
 
     print_green "\n\n\n-> INDICE: $indice \n-> PROJETO: $projeto \n-> BUNDLE: $bundle\n\n"

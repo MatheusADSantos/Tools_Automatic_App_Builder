@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # caminhoRaiz=$(pwd);
-# pathKeystores=~/Documents/Products_Customs/Keystores//
+# pathKeystores=~/Documents/tools-automatic-app-customs/Keystores//
 
 # echo -e $"\nCaminho de origem do gerador de keystore: /Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home"
 # # cd /Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home
@@ -33,7 +33,7 @@ if [[ $nomeDaKeystore == '' || $alias == '' ]]; then
   # sh $pathScripts/generatorKeystore.sh $nomeDaKeystore $alias
 fi
 
-keystorePath=~/Documents/Products_Customs/Keystores/
+keystorePath=~/Documents/tools-automatic-app-customs/Keystores/
 # generatorPathOfKeystore=~/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home
 generatorPathOfKeystore=/Library/Java/JavaVirtualMachines/jdk-11.0.12.jdk
 

@@ -28,7 +28,7 @@ indice=$1
 projectFmobile=$2
 device=$3
 contatoTeste=$4
-pathProjects=~/Documents/Products_Customs/Projetos
+pathProjects=~/Documents/tools-automatic-app-customs/Projetos
 
 print_light_red "\n\n\nAutomação Prints FMobile 6.0"
 print_green "\n*** Indice: $indice \n*** Projeto FMobile: $projectFmobile \n*** Device ID: $device \n*** Contato Teste: $contatoTeste"
@@ -135,7 +135,7 @@ searchingAndRemovingDevicePrints() {
 }
 
 getInformation() {
-  pathProjects=~/Documents/Products_Customs/Projetos
+  pathProjects=~/Documents/tools-automatic-app-customs/Projetos
   cd $pathProjects
   touch projetos.txt            #Criando projetos.txt
   printf "$(ls)" >>projetos.txt #Inserindo o conteúdo no projetos.txt

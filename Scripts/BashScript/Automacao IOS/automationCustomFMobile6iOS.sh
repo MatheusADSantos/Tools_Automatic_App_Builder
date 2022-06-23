@@ -28,7 +28,7 @@ print_blue "\n\n-------------------  $(print_light_blue "AUTOMAÇÃO DE CUSTOMIZ
 pathScripts=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/
 pathBashScripts=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript/
 pathRootFMobile=~/Documents/Fulltrack/FMobile6_IOS/
-pathCustomProjects=~/Documents/Products_Customs/Projetos/
+pathCustomProjects=~/Documents/tools-automatic-app-customs/Projetos/
 
 print_blue "\n\n-> New project or Update? (N/U)\n"
 read newProjectOrUpdate

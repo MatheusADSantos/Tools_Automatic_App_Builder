@@ -21,7 +21,7 @@ print_light_green() {
 pathProject=$1
 PATH_APKSIGNER=~/Library/Android/sdk/build-tools/29.0.3/apksigner
 pathScripts=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript
-keystorePath=~/Documents/Products_Customs/Keystores/
+keystorePath=~/Documents/tools-automatic-app-customs/Keystores/
 pathToRoot=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/
 # Dados da keystore
 nomeDaKeystore=$2
@@ -58,7 +58,7 @@ print_blue "\n\n*** Processo ... $automatico\n\n\n"
 sleep 10
 
 # sh $pathScripts/Automação\ Android/buildInstallMovingAPKAAB.sh $pathProject $nomeDaKeystore $alias $passwordDaKeystore1 $passwordDaKeystore2 $projeto $buildName $versionCode 'automatico'
-# buildInstallMovingAPKAAB.sh ~/Documents/Fulltrack/FMobile6_Android/ invictuscontrol invictuscontrol invictuscontrol5977 invictuscontrol5977 5977_Invictus_Control Invictus_Control 60008 'automatico'
+# buildInstallMovingAPKAAB.sh ~/Documents/Fulltrack/Gitlab_Projects/FMobile6_Android invictuscontrol invictuscontrol invictuscontrol5977 invictuscontrol5977 5977_Invictus_Control Invictus_Control 60008 'automatico'
 
 builddingApkAndAAB() {
   # # Removendo Google-Service pra não dar conflito
@@ -108,7 +108,7 @@ builddingApkAndAAB() {
   # mv ./$BUILD_APK_UNSIGNED.apk ./$BUILD.apk
   mv ./$BUILD.apk $pathProject/app/build/outputs/apk/release/
   rm ./$nomeDaKeystore.keystore
-  # ~/Library/Android/sdk/build-tools/29.0.3/apksigner sign --ks ~/Documents/Products_Customs/Keystores//invictuscontrol.keystore --ks-key-alias invictus --ks-pass pass:invictuscontrol5977 --key-pass pass:invictuscontrol5977 ./app-release.apk
+  # ~/Library/Android/sdk/build-tools/29.0.3/apksigner sign --ks ~/Documents/tools-automatic-app-customs/Keystores//invictuscontrol.keystore --ks-key-alias invictus --ks-pass pass:invictuscontrol5977 --key-pass pass:invictuscontrol5977 ./app-release.apk
 
   cd $pathProject/app/build/outputs/apk/release/
   print_blue "\n\n-> Movendo de: \n$pathProject/app/build/outputs/apk/release/$BUILD.apk para: \n$pathToRoot\n"
@@ -178,9 +178,9 @@ movingBuildsToProject() {
   cd $pathToRoot
   print_light_red "\n\n\n---------      Movendo os BUILDS(.apk(release/debug), .aab)      ---------\n\n"
   sleep 5
-  mv ./$BUILD.aab ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/"$buildName"_"$versionCode".aab
-  mv ./$BUILD.apk ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/"$buildName"_"$versionCode".apk
-  mv ./app-debug.apk ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/
+  mv ./$BUILD.aab ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/"BUILDS"/Android/"$buildName"_"$versionCode".aab
+  mv ./$BUILD.apk ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/"BUILDS"/Android/"$buildName"_"$versionCode".apk
+  mv ./app-debug.apk ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/"BUILDS"/Android/
   rm $nomeDaKeystore.keystore
   rm $BUILDS.apks #arquivo pesado, necessário somente na hora de instalar ...
 }

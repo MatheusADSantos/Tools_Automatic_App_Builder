@@ -39,7 +39,7 @@ print_light_green() {
 
 # FMOBILE 5.0
 pathScripts=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/BashScript
-keystorePath=~/Documents/Products_Customs/Keystores/
+keystorePath=~/Documents/tools-automatic-app-customs/Keystores/
 # pathToRoot=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls #Path de onde está o script.ssh e o bundletool
 pathToRoot=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts
 pathProject=~/Documents/Fulltrack/FMobileRN/android #$(pwd)
@@ -102,7 +102,7 @@ builddingApkAndAAB() {
   # mv ./app-release-unsigned.apk ./$BUILD.apk
   mv ./$BUILD.apk $pathProject/app/build/outputs/apk/release/
   rm ./$nomeDaKeystore.keystore
-  # ~/Library/Android/sdk/build-tools/29.0.3/apksigner sign --ks ~/Documents/Products_Customs/Keystores//invictuscontrol.keystore --ks-key-alias invictus --ks-pass pass:invictuscontrol5977 --key-pass pass:invictuscontrol5977 ./app-release.apk
+  # ~/Library/Android/sdk/build-tools/29.0.3/apksigner sign --ks ~/Documents/tools-automatic-app-customs/Keystores//invictuscontrol.keystore --ks-key-alias invictus --ks-pass pass:invictuscontrol5977 --key-pass pass:invictuscontrol5977 ./app-release.apk
 
   cd $pathProject/app/build/outputs/apk/release/
   print_blue "\n\n-> Movendo de: \n$pathProject/app/build/outputs/apk/release/$BUILD.apk para: \n$pathToRoot\n"

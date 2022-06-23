@@ -94,9 +94,9 @@ enteringTheDatas() {
   print_light_red "\n\n\n\n\n--------------------      Entrando com os dados ...      --------------------"
   # Paths Uteis ...
   # pathScripts=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/BashScript
-  # keystorePath=~/Documents/Products_Customs/Keystores/
+  # keystorePath=~/Documents/tools-automatic-app-customs/Keystores/
   # pathToRoot=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls #Path de onde está o script.ssh e o bundletool
-  # pathProject=~/Documents/Fulltrack/FMobile6_Android/               #$(pwd)
+  # pathProject=~/Documents/Fulltrack/Gitlab_Projects/FMobile6_Android               #$(pwd)
   # PATH_APKSIGNER=~/Library/Android/sdk/build-tools/29.0.3/apksigner
 
   # BUILD_APK_UNSIGNED=app-release-unsigned
@@ -107,7 +107,7 @@ enteringTheDatas() {
 
   # FMOBILE 5.0
   pathScripts=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/BashScript
-  keystorePath=~/Documents/Products_Customs/Keystores/
+  keystorePath=~/Documents/tools-automatic-app-customs/Keystores/
   # pathToRoot=~/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls #Path de onde está o script.ssh e o bundletool
   pathToRoot=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts
   pathProject=~/Documents/Fulltrack/FMobileRN/android               #$(pwd)
@@ -376,7 +376,7 @@ VersionCode: $versionCode na data $data
     mv ./info_"$projeto".html $pathToRoot
 
   else
-    cd ~/Documents/Products_Customs/Projetos
+    cd ~/Documents/tools-automatic-app-customs/Projetos
     print_blue "\n\n>>> PROJETOS EXISTENTES <<<\n$(print_green "$(ls)") \n\n$(print_blue "-> Indice do Projeto:")\n"
     read indice
 
@@ -396,7 +396,7 @@ VersionCode: $versionCode na data $data
       versao=$(awk '/versionName/{print}' build.gradle | awk '{sub(/versionName /,""); print}' | awk '{sub(/"/,""); print}' | awk '{sub(/"/,""); print}' | awk '{ gsub (" ", "", $0); print}')
       versionCode=$(awk '/versionCode/{print}' build.gradle | awk '{sub(/versionCode /,""); print}' | awk '{print($0+0)}' | awk 'NR==1{print $1}')
 
-      cd ~/Documents/Products_Customs/Projetos/"$projeto"/
+      cd ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/
       nome=$(awk '/Nome do App:/{print $0}' info.txt | awk '{sub(/Nome do App: /,""); print}')
       alias=$(awk '/AliasDaKeyStore/{print $0}' info.txt | awk '{sub(/AliasDaKeyStore: /,""); print}')
       nomeDaKeystore=$(awk '/NomeDaKeyStore/{print $0}' info.txt | awk '{sub(/NomeDaKeyStore: /,""); print}')
@@ -421,7 +421,7 @@ VersionCode: $versionCode na data $data
 
   # projeto="$indice"_"$nome"
   print_light_red "\n\n-> Seu projeto estará em:\n"
-  echo -e "~/Documents/Products_Customs/Projetos/"$projeto" "
+  echo -e "~/Documents/tools-automatic-app-customs/Projetos/"$projeto" "
 
   print_blue "\n\n-> INDICE: $indice\n"
   print_blue "-> Nome do App: $nome\n"
@@ -557,7 +557,7 @@ builddingApkAndAAB() {
   # mv ./app-release-unsigned.apk ./$BUILD.apk
   mv ./$BUILD.apk $pathProject/app/build/outputs/apk/release/
   rm ./$nomeDaKeystore.keystore
-  # ~/Library/Android/sdk/build-tools/29.0.3/apksigner sign --ks ~/Documents/Products_Customs/Keystores//invictuscontrol.keystore --ks-key-alias invictus --ks-pass pass:invictuscontrol5977 --key-pass pass:invictuscontrol5977 ./app-release.apk
+  # ~/Library/Android/sdk/build-tools/29.0.3/apksigner sign --ks ~/Documents/tools-automatic-app-customs/Keystores//invictuscontrol.keystore --ks-key-alias invictus --ks-pass pass:invictuscontrol5977 --key-pass pass:invictuscontrol5977 ./app-release.apk
 
   cd $pathProject/app/build/outputs/apk/release/
   print_blue "\n\n-> Movendo de: \n$pathProject/app/build/outputs/apk/release/$BUILD.apk para: \n$pathToRoot\n"
@@ -611,40 +611,40 @@ movingProject() {
     print_light_red "\n\n\n------------------------       PROJETO NOVO!!!       -------------------------"
     echo -e "\nCriando pasta do projeto e movendo os arquivos(.aab/.apk/.keystore/.txt(com as info))...\n\n"
 
-    mkdir ~/Documents/Products_Customs/Projetos/"$projeto"
-    mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/KEYSTORE
-    mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/OUTROS
-    mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/BUILDS
-    mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/BUILDS/Android
-    mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/BUILDS/IOS
-    mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/IMAGENS
-    mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/IMAGENS/ImagensDoProjeto
-    mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/IMAGENS/prints
-    mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/IMAGENS/prints/Android
-    mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/IMAGENS/prints/IOS
-    mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/IMAGENS/prints/IOS/iPhone_5.5
-    mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/IMAGENS/prints/IOS/iPhone_6.5
-    mkdir ~/Documents/Products_Customs/Projetos/"$projeto"/IMAGENS/prints/IOS/iPad_12.9
+    mkdir ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"
+    mkdir ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/KEYSTORE
+    mkdir ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/OUTROS
+    mkdir ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/BUILDS
+    mkdir ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/BUILDS/Android
+    mkdir ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/BUILDS/IOS
+    mkdir ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/IMAGENS
+    mkdir ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/IMAGENS/ImagensDoProjeto
+    mkdir ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/IMAGENS/prints
+    mkdir ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/IMAGENS/prints/Android
+    mkdir ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/IMAGENS/prints/IOS
+    mkdir ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/IMAGENS/prints/IOS/iPhone_5.5
+    mkdir ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/IMAGENS/prints/IOS/iPhone_6.5
+    mkdir ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/IMAGENS/prints/IOS/iPad_12.9
 
     echo -e "\n\n>>> MOVENDO... \nEm: $(pwd)\n"
-    mv ~/Documents/Products_Customs/Imagens/* ~/Documents/Products_Customs/Projetos/"$projeto"/"IMAGENS"/"ImagensDoProjeto"
-    mv ./google-services.json ~/Documents/Products_Customs/Projetos/"$projeto"/
-    printf "\n\n\n$projeto \n- Versão: $versao \n- versionCode: $versionCode \n- Data: $data" >>~/Documents/Products_Customs/Projetos/customs_fmobile_6.0.txt
+    mv ~/Documents/tools-automatic-app-customs/Imagens/* ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/"IMAGENS"/"ImagensDoProjeto"
+    mv ./google-services.json ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/
+    printf "\n\n\n$projeto \n- Versão: $versao \n- versionCode: $versionCode \n- Data: $data" >>~/Documents/tools-automatic-app-customs/Projetos/customs_fmobile_6.0.txt
 
-    mv ./$nomeDaKeystore.keystore ~/Documents/Products_Customs/Projetos/"$projeto"/"KEYSTORE"
-    mv ./info.txt ~/Documents/Products_Customs/Projetos/"$projeto"
-    mv ./info_"$projeto".html ~/Documents/Products_Customs/Projetos/"$projeto"
+    mv ./$nomeDaKeystore.keystore ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/"KEYSTORE"
+    mv ./info.txt ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"
+    mv ./info_"$projeto".html ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"
 
-    mv ./$BUILD.aab ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/"$nome"_"$versionCode".aab
-    mv ./$BUILD.apk ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/"$nome"_"$versionCode".apk
-    mv ./app-debug.apk ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/
+    mv ./$BUILD.aab ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/"BUILDS"/Android/"$nome"_"$versionCode".aab
+    mv ./$BUILD.apk ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/"BUILDS"/Android/"$nome"_"$versionCode".apk
+    mv ./app-debug.apk ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/"BUILDS"/Android/
     rm $BUILDS.apks #arquivo pesado, necessário somente na hora de instalar ...
   else
     print_light_red "\n\n\n---------      Movendo apenas os BUILDS(.apk(release/debug), .aab)      ---------\n\n"
     sleep 5
-    mv ./$BUILD.aab ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/"$nome"_"$versionCode".aab
-    mv ./$BUILD.apk ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/"$nome"_"$versionCode".apk
-    mv ./app-debug.apk ~/Documents/Products_Customs/Projetos/"$projeto"/"BUILDS"/Android/
+    mv ./$BUILD.aab ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/"BUILDS"/Android/"$nome"_"$versionCode".aab
+    mv ./$BUILD.apk ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/"BUILDS"/Android/"$nome"_"$versionCode".apk
+    mv ./app-debug.apk ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/"BUILDS"/Android/
     rm $nomeDaKeystore.keystore
     rm $BUILDS.apks #arquivo pesado, necessário somente na hora de instalar ...
   fi
@@ -699,18 +699,18 @@ uploadProjectToSeverFileSystem() {
   print_blue "\n\n-> Abrindo o local onde ficam as custom no servidor (FileSystem) ..."
   open smb://192.168.1.14/mobile/FMobile/FMobile_6/Customs
 
-  # pathToBuildsAndroid=~/Documents/Products_Customs/Projetos/"$projeto"/BUILDS/Android # Path Correto: /Users/macbook-estagio/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos/5977_Invictus\ Control/BUILDS/Android
+  # pathToBuildsAndroid=~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/BUILDS/Android # Path Correto: /Users/macbook-estagio/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos/5977_Invictus\ Control/BUILDS/Android
   # print_red "\n\n\npathToBuildsAndroid (ERRADO): $pathToBuildsAndroid"
   # pathToBuildsAndroid=$(echo "$pathToBuildsAndroid" | awk '{sub(/ /,"\\ "); print}') # Aqui estou inserindo a barra invertida(\) pra aceitar o espaço e pegar o path corretamente
   # print_blue "\npathToBuildsAndroid (CORRETO): $pathToBuildsAndroid"
   # echo -e "/Users/macbook-estagio/Desktop/matheus/trabalho/EXECUTAVEIS/Scripts/AABTolls/Projetos/5977_Invictus Control/BUILDS/Android" | awk '{sub(/ /,"\\ "); print}'
 
-  pathToBuildsAndroid=~/Documents/Products_Customs/Projetos/"$projeto"/BUILDS/Android
+  pathToBuildsAndroid=~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/BUILDS/Android
 
   if [[ $newProjectOrUpdate == 'novo' || $newProjectOrUpdate == 'n' ]]; then
     print_blue "\n\n-> Subindo o projeto TODO!"
     echo -e "\n-> SENHA para acessar o servidor: $(print_green "yTYa@V@QJrtP")\n"
-    scp -r ~/Documents/Products_Customs/Projetos/"$projeto"/ matheussantos@192.168.1.14:/backups/Arquivos/Mobile/FMobile/FMobile_6/Customs
+    scp -r ~/Documents/tools-automatic-app-customs/Projetos/"$projeto"/ matheussantos@192.168.1.14:/backups/Arquivos/Mobile/FMobile/FMobile_6/Customs
   else
     print_blue "\n\n-> Subindo apenas os BUILDS"
     echo -e "\n-> SENHA para acessar o servidor: $(print_green "yTYa@V@QJrtP")\n"

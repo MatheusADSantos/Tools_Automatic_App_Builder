@@ -29,7 +29,7 @@ rootProjectAutomation=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic
 pathScripts=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/
 pathBashScripts=~/Desktop/matheus/trabalho/Gitlab_Projects/tools-automatic-app-builder/Scripts/BashScript/
 pathProject=~/Documents/Fulltrack/FMobile6_IOS/
-pathCustomProject=~/Documents/Products_Customs/Projetos/$project
+pathCustomProject=~/Documents/tools-automatic-app-customs/Projetos/$project
 
 
 
